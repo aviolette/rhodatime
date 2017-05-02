@@ -4,7 +4,9 @@ require 'minitest/autorun'
 
 class TestLocalTime < Minitest::Test
 
-  def test_of_default_params
+  ## OF
+
+def test_of_default_params
     t = RhodaTime::LocalTime.of(3, 4)
     assert_equal(3, t.hour)
     assert_equal(4, t.minute)
@@ -44,6 +46,8 @@ class TestLocalTime < Minitest::Test
     end
   end
 
+  ## NOW
+
   def test_now
     t = RhodaTime::LocalTime.now
     assert(!t.nil?)
@@ -56,6 +60,8 @@ class TestLocalTime < Minitest::Test
     assert_equal(31, t.second)
     assert_equal(312, t.millis)
   end
+
+  ## AFTER?
 
   def test_after_same_hour
     t1 = RhodaTime::LocalTime.of(12, 30)
@@ -84,6 +90,38 @@ class TestLocalTime < Minitest::Test
     assert(!t1.after?(t2))
     assert(t2.after?(t1))
   end
+
+  def test_after_different_second
+    t1 = RhodaTime::LocalTime.of(11, 30, 5)
+    t2 = RhodaTime::LocalTime.of(11, 30, 6)
+    assert(!t1.after?(t2))
+    assert(t2.after?(t1))
+  end
+
+  def test_after_different_second
+    t1 = RhodaTime::LocalTime.of(11, 30, 5, 1)
+    t2 = RhodaTime::LocalTime.of(11, 30, 5, 0)
+    assert(t1.after?(t2))
+    assert(!t2.after?(t1))
+  end
+
+  ## BEFORE?
+
+  def test_before_same
+    t1 = RhodaTime::LocalTime.of(11, 30)
+    t2 = RhodaTime::LocalTime.of(11, 30)
+    assert(!t1.before?(t2))
+    assert(!t2.before?(t1))
+  end
+
+  def test_before1
+    t1 = RhodaTime::LocalTime.of(9, 45)
+    t2 = RhodaTime::LocalTime.of(11, 30)
+    assert(t1.before?(t2))
+    assert(!t2.before?(t1))
+  end
+
+  ## TO_S
 
   def test_to_s
     assert_equal("09:14", RhodaTime::LocalTime.of(9, 14).to_s)

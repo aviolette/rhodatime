@@ -27,18 +27,28 @@ module RhodaTime
 
     def after?(other)
       if other.hour < @hour
-        true
+        return true
       elsif other.hour == @hour
         if other.minute < @minute
-          true
+          return true
         elsif other.minute == @minute
-          return other.second < @second
-        else
-          false
+          if other.second < @second
+            return true
+          elsif other.second == @second
+            return other.millis < @millis
+          end
         end
-      else
-        false
       end
+      false
+    end
+
+    # Returns true if this time and another time represent the same time
+    def same?(other)
+      other.hour == @hour and other.minute == @minute and other.second == @second and other.millis == @millis
+    end
+
+    def before?(other)
+      !same?(other) && !after?(other)
     end
 
     private
