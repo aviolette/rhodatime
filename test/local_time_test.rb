@@ -2,7 +2,7 @@ require_relative './fake_clock'
 require_relative '../lib/rhodatime'
 require 'minitest/autorun'
 
-class TestDateTime < Minitest::Test
+class TestLocalTime < Minitest::Test
 
   def test_of_default_params
     t = RhodaTime::LocalTime.of(3, 4)

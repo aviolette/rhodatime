@@ -9,18 +9,6 @@ module RhodaTime
       self.from_epoch(clock.now)
     end
 
-    # Returns a new LocalTime initializes with epoch time and the default time zone
-    def self.from_epoch(epoch)
-      epoch_in_seconds = epoch / 1000
-      millis = epoch % 1000
-      days_from_epoch = epoch_in_seconds / 86400
-      seconds_from_start_of_day = epoch_in_seconds - (86400 * days_from_epoch)
-      hours_in_day = seconds_from_start_of_day / 3600
-      minutes_in_hour = (seconds_from_start_of_day % 3600) / 60
-      seconds_in_minutes = (seconds_from_start_of_day - (hours_in_day * 3600) - (minutes_in_hour * 60))
-      self.new(hours_in_day, minutes_in_hour, seconds_in_minutes, millis)
-    end
-
     def self.of(hour, minute, second = 0, millis = 0)
       self.new(hour, minute, second, millis)
     end
@@ -54,6 +42,19 @@ module RhodaTime
     end
 
     private
+
+
+    # Returns a new LocalTime initializes with epoch time and the default time zone
+    def self.from_epoch(epoch)
+      epoch_in_seconds = epoch / 1000
+      millis = epoch % 1000
+      days_from_epoch = epoch_in_seconds / 86400
+      seconds_from_start_of_day = epoch_in_seconds - (86400 * days_from_epoch)
+      hours_in_day = seconds_from_start_of_day / 3600
+      minutes_in_hour = (seconds_from_start_of_day % 3600) / 60
+      seconds_in_minutes = (seconds_from_start_of_day - (hours_in_day * 3600) - (minutes_in_hour * 60))
+      self.new(hours_in_day, minutes_in_hour, seconds_in_minutes, millis)
+    end
 
     def initialize(hour, minute, second = 0, millis = 0)
       raise DateTimeException, "Hour is not in range: #{hour}" if hour < 0 || hour > 23
