@@ -25,6 +25,18 @@ module RhodaTime
       self.new(hour, minute, second, millis)
     end
 
+    def to_s
+      if @millis == 0
+        if @second == 0
+          sprintf("%02d:%02d", @hour, @minute)
+        else
+          sprintf("%02d:%02d:%2d", @hour, @minute, @second)
+        end
+      else
+        sprintf("%02d:%02d:%02d.%03d", @hour, @minute, @second, @millis)
+      end
+    end
+
     def after?(other)
       if other.hour < @hour
         true

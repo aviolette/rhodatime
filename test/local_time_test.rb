@@ -84,4 +84,10 @@ class TestDateTime < Minitest::Test
     assert(!t1.after?(t2))
     assert(t2.after?(t1))
   end
+
+  def test_to_s
+    assert_equal("09:14", RhodaTime::LocalTime.of(9, 14).to_s)
+    assert_equal("09:06:14", RhodaTime::LocalTime.of(9, 6, 14).to_s)
+    assert_equal("09:06:14.001", RhodaTime::LocalTime.of(9, 6, 14, 1).to_s)
+  end
 end
