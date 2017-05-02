@@ -53,26 +53,6 @@ module RhodaTime
       end
     end
 
-    def before?(other)
-
-    end
-
-    def minus(other)
-
-    end
-
-    def minusHours(hours)
-
-    end
-
-    def minusMinutes(minutes)
-
-    end
-
-    def minusSeconds(seconds)
-
-    end
-
     private
 
     def initialize(hour, minute, second = 0, millis = 0)
@@ -81,14 +61,6 @@ module RhodaTime
       raise DateTimeException, "Second is not in range: #{second}" if second < 0 || second > 59
       raise DateTimeException, "Milliseconds is not in range: #{second}" if millis < 0 || millis > 999
       @hour = hour; @minute = minute; @second = second; @millis = millis
-    end
-
-    def self.hours_from_epoch(epoch)
-
-    end
-
-    def self.minutes_from_epoch(epoch)
-
     end
   end
 end
