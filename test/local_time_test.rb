@@ -98,7 +98,7 @@ def test_of_default_params
     assert(t2.after?(t1))
   end
 
-  def test_after_different_second
+  def test_after_different_second2
     t1 = RhodaTime::LocalTime.of(11, 30, 5, 1)
     t2 = RhodaTime::LocalTime.of(11, 30, 5, 0)
     assert(t1.after?(t2))
