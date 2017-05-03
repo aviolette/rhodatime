@@ -24,5 +24,4 @@ class TestLocalDateTime < Minitest::Test
     assert_equal(0, d.minute)
     assert_equal(0, d.second)
   end
-
 end
