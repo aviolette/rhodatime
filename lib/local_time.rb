@@ -1,12 +1,12 @@
 require_relative './date_time_exception'
-require_relative './real_clock'
+require_relative './clock'
 require_relative './date_time_formatter'
 
 module RhodaTime
   class LocalTime
     attr_reader :hour, :minute, :second, :millis
 
-    def self.now(clock = RealClock.instance)
+    def self.now(clock = Clock.instance)
       self.from_epoch(clock.now)
     end
 

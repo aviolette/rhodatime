@@ -9,7 +9,7 @@ module RhodaTime
       self.new(year, month, day)
     end
 
-    def self.now(clock = RealClock.instance)
+    def self.now(clock = Clock.instance)
       self.from_epoch(clock.now)
     end
 

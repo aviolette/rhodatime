@@ -8,38 +8,24 @@ module RhodaTime
       self.new(LocalDate.of(year, month, day), LocalTime.of(hour, minute, second, millis))
     end
 
-    def self.now(clock = RealClock.instance)
+    def self.now(clock = Clock.instance)
       epoch = clock.now
       self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch))
     end
 
-    def year
-      @date.year
-    end
+    def year ; @date.year ; end
 
-    def month
-      @date.month
-    end
+    def month ; @date.month ; end
 
-    def day
-      @date.day
-    end
+    def day ; @date.day ; end
 
-    def hour
-      @time.hour
-    end
+    def hour ; @time.hour ; end
 
-    def minute
-      @time.minute
-    end
+    def minute ; @time.minute ; end
 
-    def second
-      @time.second
-    end
+    def second ; @time.second ; end
 
-    def millis
-      @time.millis
-    end
+    def millis ; @time.millis ; end
 
     def with_millis(millis)
       LocalDateTime.new(@date, @time.with_millis(millis))

@@ -4,7 +4,7 @@ require 'singleton'
 module RhodaTime
 
   # A clock that returns the epoch time
-  class RealClock
+  class Clock
     include Singleton
 
     # returns the epoch time in milliseconds
