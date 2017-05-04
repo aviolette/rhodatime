@@ -89,7 +89,7 @@ module RhodaTime
 
     def to_epoch
       t = Time.new(year, month, day, hour, minute, second + (millis / 1000), "+00:00")
-      t.to_i * 1000
+      (t.to_f * 1000).to_i
     end
 
     private
