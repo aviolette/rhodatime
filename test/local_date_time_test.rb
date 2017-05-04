@@ -132,6 +132,54 @@ module RhodaTime
       end
     end
 
+    def test_plus_years
+      dt = @date_time.plus_years(10)
+      assert_equal(2027, dt.year)
+      assert_equal(12, dt.month)
+      assert_equal(1, dt.day)
+      assert_equal(13, dt.hour)
+      assert_equal(14, dt.minute)
+      assert_equal(15, dt.second)
+      assert_equal(16, dt.millis)
+    end
+
+    def test_minus_years
+      dt = @date_time.minus_years(10)
+      assert_equal(2007, dt.year)
+      assert_equal(12, dt.month)
+      assert_equal(1, dt.day)
+      assert_equal(13, dt.hour)
+      assert_equal(14, dt.minute)
+      assert_equal(15, dt.second)
+      assert_equal(16, dt.millis)
+    end
+
+    def test_plus_month
+      # TODO: implement
+    end
+
+    def test_plus_days
+      dt = @date_time.plus_days(33)
+      assert_equal(2018, dt.year)
+      assert_equal(1, dt.month)
+      assert_equal(3, dt.day)
+      assert_equal(13, dt.hour)
+      assert_equal(14, dt.minute)
+      assert_equal(15, dt.second)
+      assert_equal(16, dt.millis)
+    end
+
+    def test_minus_days
+      dt = @date_time.minus_days(365)
+      assert_equal(2016, dt.year)
+      assert_equal(12, dt.month)
+      assert_equal(1, dt.day)
+      assert_equal(13, dt.hour)
+      assert_equal(14, dt.minute)
+      assert_equal(15, dt.second)
+      assert_equal(16, dt.millis)
+    end
+
     ## TO_S
 
     def test_to_s

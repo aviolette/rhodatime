@@ -1,3 +1,4 @@
+require 'time'
 require_relative './local_date'
 require_relative './local_time'
 
@@ -59,7 +60,37 @@ module RhodaTime
       formatter.format self
     end
 
+    def plus_years(years)
+      with_year(@date.year + years)
+    end
+
+    def minus_years(years)
+      plus_years -years
+    end
+
+    def plus_months(months)
+      ## implement
+    end
+
+    def minus_months(months)
+      plus_months -months
+    end
+
+    def plus_days(days)
+      epoch = to_epoch + (days * 86400000)
+      LocalDateTime.new(LocalDate.from_epoch(epoch), @time)
+    end
+
+    def minus_days(days)
+      plus_days -days
+    end
+
     def to_s ; format ; end
+
+    def to_epoch
+      t = Time.new(year, month, day, hour, minute, second + (millis / 1000), "+00:00")
+      t.to_i * 1000
+    end
 
     private
 
