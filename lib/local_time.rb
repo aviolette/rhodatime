@@ -3,6 +3,9 @@ require_relative './clock'
 require_relative './date_time_formatter'
 
 module RhodaTime
+
+  # Represents a time independent of a day or a time zone.  A time is represented in hours, minutes, seconds, and
+  # milliseconds
   class LocalTime
     attr_reader :hour, :minute, :second, :millis
 
