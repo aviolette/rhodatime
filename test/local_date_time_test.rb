@@ -109,6 +109,29 @@ module RhodaTime
       end
     end
 
+    def test_with_second
+      d = @date_time.with_second(5)
+      assert_equal(2017, d.year)
+      assert_equal(12, d.month)
+      assert_equal(1, d.day)
+      assert_equal(13, d.hour)
+      assert_equal(14, d.minute)
+      assert_equal(5, d.second)
+      assert_equal(16, d.millis)
+    end
+
+    def test_with_second_too_high
+      assert_raises DateTimeException do
+        @date_time.with_second(60)
+      end
+    end
+
+    def test_with_second_too_low
+      assert_raises DateTimeException do
+        @date_time.with_second(-1)
+      end
+    end
+
     ## TO_S
 
     def test_to_s
