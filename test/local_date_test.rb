@@ -4,7 +4,6 @@ require 'minitest/autorun'
 
 module RhodaTime
   class TestLocalDate < Minitest::Test
-
     ## OF
 
     def test_local_of
@@ -113,6 +112,15 @@ module RhodaTime
       assert_raises DateTimeException do
         LocalDate.of(2017, 3, 14).with_day(0)
       end
+    end
+
+    ## TO_S
+
+    def test_to_s
+      d = LocalDate.of(2017, 3, 14)
+      assert_equal("2017-03-14", d.to_s)
+      assert_equal("2017-03-14", d.format)
+      assert_equal("2017-03-14", d.format(DateTimeFormatter::ISO_LOCAL_DATE))
     end
   end
 end

@@ -58,6 +58,12 @@ module RhodaTime
       LocalDate.of(year, @month, @day)
     end
 
+    def format(formatter = DateTimeFormatter::ISO_LOCAL_DATE)
+      formatter.format self
+    end
+
+    def to_s ; format ; end
+
     private
 
     def initialize(year, month, day)
