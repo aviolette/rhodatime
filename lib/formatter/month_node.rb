@@ -34,7 +34,7 @@ module RhodaTime
         elsif @size == 2
           twopad(val)
         else
-          val
+          val.to_s
         end
       end
     end

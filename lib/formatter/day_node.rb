@@ -10,7 +10,7 @@ module RhodaTime
       def print(time)
         val = time.day
         if @size == 1
-          val
+          val.to_s
         else
           twopad(val)
         end

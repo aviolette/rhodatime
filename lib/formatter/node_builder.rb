@@ -7,7 +7,7 @@ module RhodaTime
   module Formatter
     class NodeBuilder
 
-      @@node_map = {
+      NODE_MAP = {
           'Y' => YearNode,
           'M' => MonthNode,
           'd' => DayNode
@@ -32,7 +32,7 @@ module RhodaTime
       end
 
       def self.node_class(field)
-        @@node_map[field] || ConstantNode
+        NODE_MAP[field] || ConstantNode
       end
     end
   end

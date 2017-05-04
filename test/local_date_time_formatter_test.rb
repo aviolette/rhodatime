@@ -6,11 +6,17 @@ module RhodaTime
 
     def setup
       @date1 = LocalDate.of(2017, 1, 6)
+      @date_time1 = LocalDateTime.of(2017, 1, 6, 9, 13)
     end
 
     def test_local_date
       formatter = DateTimeFormatter::ISO_LOCAL_DATE
       assert_equal("2017-01-06", formatter.format(@date1))
+    end
+
+    def test_local_date_time
+      formatter = DateTimeFormatter::ISO_LOCAL_DATE
+      assert_equal("2017-01-06", formatter.format(@date_time1))
     end
 
     def test_yyyy
@@ -96,6 +102,36 @@ module RhodaTime
     def test_mmmm_december
       formatter = DateTimeFormatter.new("MMMM")
       assert_equal("December", formatter.format(@date1.with_month(12)))
+    end
+
+    def test_mmm
+      formatter = DateTimeFormatter.new("MMM")
+      assert_equal("Dec", formatter.format(@date1.with_month(12)))
+    end
+
+    def test_mm
+      formatter = DateTimeFormatter.new("MM")
+      assert_equal("12", formatter.format(@date1.with_month(12)))
+    end
+
+    def test_mm_1
+      formatter = DateTimeFormatter.new("MM")
+      assert_equal("01", formatter.format(@date1.with_month(1)))
+    end
+
+    def test_m
+      formatter = DateTimeFormatter.new("M")
+      assert_equal("1", formatter.format(@date1.with_month(1)))
+    end
+
+    def test_dd
+      formatter = DateTimeFormatter.new("dd")
+      assert_equal("06", formatter.format(@date1))
+    end
+
+    def test_d
+      formatter = DateTimeFormatter.new("d")
+      assert_equal("6", formatter.format(@date1))
     end
   end
 end

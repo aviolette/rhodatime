@@ -13,6 +13,22 @@ module RhodaTime
       self.new(hour, minute, second, millis)
     end
 
+    def with_hour(hour)
+      LocalTime.of(hour, @minute, @second, @millis)
+    end
+
+    def with_minute(minute)
+      LocalTime.of(@hour, minute, @second, @millis)
+    end
+
+    def with_second(second)
+      LocalTime.of(@hour, @minute, second, @millis)
+    end
+
+    def with_millis(millis)
+      LocalTime.of(@hour, @minute, @second, millis)
+    end
+
     def to_s
       if @millis == 0
         if @second == 0
