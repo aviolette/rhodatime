@@ -1,5 +1,6 @@
 require_relative './date_time_exception'
 require_relative './real_clock'
+require_relative './date_time_formatter'
 
 module RhodaTime
   class LocalTime
@@ -29,16 +30,12 @@ module RhodaTime
       LocalTime.of(@hour, @minute, @second, millis)
     end
 
+    def format(formatter = DateTimeFormatter::ISO_LOCAL_TIME)
+      formatter.format self
+    end
+
     def to_s
-      if @millis == 0
-        if @second == 0
-          sprintf("%02d:%02d", @hour, @minute)
-        else
-          sprintf("%02d:%02d:%2d", @hour, @minute, @second)
-        end
-      else
-        sprintf("%02d:%02d:%02d.%03d", @hour, @minute, @second, @millis)
-      end
+      format
     end
 
     def after?(other)
@@ -64,7 +61,7 @@ module RhodaTime
     end
 
     def before?(other)
-      !same?(other) && !after?(other)
+      !same?(other) and !after?(other)
     end
 
     private

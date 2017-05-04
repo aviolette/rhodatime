@@ -1,8 +1,7 @@
-
-
 module RhodaTime
   module Formatter
     class Node
+
       attr_reader :size
 
       def print(time)
