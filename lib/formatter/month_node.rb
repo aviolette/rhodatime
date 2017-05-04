@@ -23,8 +23,12 @@ module RhodaTime
         @size = val.length
       end
 
+      def numeric_val(time)
+        time.month
+      end
+
       def print(time)
-        val = time.month
+        val = numeric_val(time)
         if @size == 5
           MONTHS[val][0]
         elsif @size == 4

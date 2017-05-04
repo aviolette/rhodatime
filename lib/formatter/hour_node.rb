@@ -2,15 +2,16 @@ require_relative './node'
 
 module RhodaTime
   module Formatter
-    class DayNode < Node
+    class HourNode < Node
 
       def initialize(val)
         @size = val.length
       end
 
       def numeric_val(time)
-        time.day
+        time.hour
       end
+
     end
   end
 end

@@ -41,6 +41,18 @@ module RhodaTime
       @time.millis
     end
 
+    def with_millis(millis)
+      LocalDateTime.new(@date, @time.with_millis(millis))
+    end
+
+    def with_seconds(seconds)
+      LocalDateTime.new(@date, @time.with_second(seconds))
+    end
+
+    def with_minutes(minutes)
+      LocalDateTime.new(@date, @time.with_minute(minutes))
+    end
+
     private
 
     def initialize(date, time)

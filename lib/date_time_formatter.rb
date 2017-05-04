@@ -7,16 +7,16 @@ module RhodaTime
 
     def initialize(format)
       @format = format
-      @nodes = Formatter::NodeBuilder.build_nodes(@format)
+      @top_node = Formatter::NodeBuilder.build_nodes(@format)
     end
 
     ## Constants
+
     ISO_LOCAL_DATE = self.new('YYYY-MM-dd')
+    ISO_LOCAL_TIME = self.new('HH:mm[:ss[.SSS]]')
 
     def format(time)
-      @nodes.inject('') do |acc, node |
-        acc << node.print(time)
-      end
+      @top_node.print time
     end
   end
 end

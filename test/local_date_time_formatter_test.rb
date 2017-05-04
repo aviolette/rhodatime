@@ -6,7 +6,7 @@ module RhodaTime
 
     def setup
       @date1 = LocalDate.of(2017, 1, 6)
-      @date_time1 = LocalDateTime.of(2017, 1, 6, 9, 13)
+      @date_time1 = LocalDateTime.of(2017, 1, 6, 9, 13, 14, 153)
     end
 
     def test_local_date
@@ -133,5 +133,22 @@ module RhodaTime
       formatter = DateTimeFormatter.new("d")
       assert_equal("6", formatter.format(@date1))
     end
+
+    def test_local_time_all_ops
+      assert_equal("09:13:14.153", DateTimeFormatter::ISO_LOCAL_TIME.format(@date_time1))
+    end
+
+    def test_local_time_no_millis
+      assert_equal("09:13:14", DateTimeFormatter::ISO_LOCAL_TIME.format(@date_time1.with_millis(0)))
+    end
+
+    def test_local_time_no_seconds
+      assert_equal("09:13", DateTimeFormatter::ISO_LOCAL_TIME.format(@date_time1.with_millis(0).with_seconds(0)))
+    end
+
+    def test_local_time_no_minutes
+      assert_equal("09:00", DateTimeFormatter::ISO_LOCAL_TIME.format(@date_time1.with_millis(0).with_seconds(0).with_minutes(0)))
+    end
+
   end
 end

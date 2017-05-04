@@ -9,6 +9,7 @@ module RhodaTime
       def test_year_small
         nodes = NodeBuilder.build_nodes("YYYY-MM-dd")
       end
+
     end
   end
 end
