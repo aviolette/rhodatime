@@ -53,7 +53,6 @@ module RhodaTime
 
     private
 
-
     # Returns a new LocalTime initializes with epoch time and the default time zone
     def self.from_epoch(epoch)
       epoch_in_seconds = epoch / 1000

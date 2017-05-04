@@ -6,7 +6,7 @@ class TestLocalTime < Minitest::Test
 
   ## OF
 
-def test_of_default_params
+  def test_of_default_params
     t = RhodaTime::LocalTime.of(3, 4)
     assert_equal(3, t.hour)
     assert_equal(4, t.minute)

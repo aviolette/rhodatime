@@ -27,6 +27,10 @@ module RhodaTime
       LocalDateTime.of(year, month, day, time.hour, time.minute, time.second, time.millis)
     end
 
+    def with_month(month)
+      LocalDate.of(@year, month, @day)
+    end
+
     private
 
     def initialize(year, month, day)

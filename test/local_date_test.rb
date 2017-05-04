@@ -12,28 +12,28 @@ class TestLocalDate < Minitest::Test
   end
 
   def test_local_now
-    d = RhodaTime::LocalDate.now(clock=FakeClock.new(1483228800000))
+    d = RhodaTime::LocalDate.now(FakeClock.new(1483228800000))
     assert_equal(2017, d.year)
     assert_equal(1, d.month)
     assert_equal(1, d.day)
   end
 
   def test_local_now2
-    d = RhodaTime::LocalDate.now(clock=FakeClock.new(1514764800000))
+    d = RhodaTime::LocalDate.now(FakeClock.new(1514764800000))
     assert_equal(2018, d.year)
     assert_equal(1, d.month)
     assert_equal(1, d.day)
   end
 
   def test_local_now3
-    d = RhodaTime::LocalDate.now(clock=FakeClock.new(1514757599000))
+    d = RhodaTime::LocalDate.now(FakeClock.new(1514757599000))
     assert_equal(2017, d.year)
     assert_equal(12, d.month)
     assert_equal(31, d.day)
   end
 
   def test_at_start_of_day
-    d = RhodaTime::LocalDate.now(clock=FakeClock.new(1514757599000))
+    d = RhodaTime::LocalDate.now(FakeClock.new(1514757599000))
     dt = d.at_start_of_day
     assert_equal(2017, dt.year)
     assert_equal(12, dt.month)
