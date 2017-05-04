@@ -14,30 +14,54 @@ module RhodaTime
       self.new(hour, minute, second, millis)
     end
 
+    # Combines this time and the date to create a date time object
+    # @return [LocalDateTime] with the date and time combined
+    def at_date(date)
+      LocalDateTime.of(date.year, date.month, date.day, hour, minute, second, millis)
+    end
+
+    # Builds a new [LocalTime] with the specified hour, and all else the same as the current
+    # @param hour [int] the specified hour
+    # @return [LocalTime] the new time with a different hour
     def with_hour(hour)
       LocalTime.of(hour, @minute, @second, @millis)
     end
 
+    # Builds a new [LocalTime] with the specified minute, and all else the same as the current
+    # @param minute [int] the specified minute
+    # @return [LocalTime] the new time with a different minute
     def with_minute(minute)
       LocalTime.of(@hour, minute, @second, @millis)
     end
 
+    # Builds a new [LocalTime] with the specified second, and all else the same as the current
+    # @param second [int] the specified second
+    # @return [LocalTime] the new time with a different second
     def with_second(second)
       LocalTime.of(@hour, @minute, second, @millis)
     end
 
+    # Builds a new [LocalTime] with the specified millisecond, and all else the same as the current
+    # @param millis [int] the specified millisecond
+    # @return [LocalTime] the new time with a different millisecond
     def with_millis(millis)
       LocalTime.of(@hour, @minute, @second, millis)
     end
 
+    # Formats the time as a string
+    # @param formatter the formatter to perform the conversion (default is ISO local time)
+    # @return [String] the formatted date
     def format(formatter = DateTimeFormatter::ISO_LOCAL_TIME)
       formatter.format self
     end
 
-    def to_s
-      format
-    end
+    # Outputs as a string
+    # @return [String] the time formatted in ISO local time
+    def to_s ; format ; end
 
+    # Returns true if the other time is after the current time (no consideration to day is given)
+    # @param other [LocalTime] another time object
+    # @return [true, false] true if the other time is after the current time, or false if it is the same time or before
     def after?(other)
       if other.hour < @hour
         return true
@@ -56,10 +80,15 @@ module RhodaTime
     end
 
     # Returns true if this time and another time represent the same time
+    # @param other [LocalTime] another time object
+    # @return [true, false] true if the other time has the same time values as the current
     def same?(other)
       other.hour == @hour and other.minute == @minute and other.second == @second and other.millis == @millis
     end
 
+    # Returns true if the other time is before the current time
+    # @param other [LocalTime] another time object
+    # @return [true, false] true if the other time is before this time
     def before?(other)
       !same?(other) and !after?(other)
     end
