@@ -29,6 +29,88 @@ module RhodaTime
       assert_equal(0, d.second)
     end
 
+    def test_with_year
+      d = @date_time.with_year(1444)
+      assert_equal(1444, d.year)
+      assert_equal(12, d.month)
+      assert_equal(1, d.day)
+      assert_equal(13, d.hour)
+      assert_equal(14, d.minute)
+      assert_equal(15, d.second)
+      assert_equal(16, d.millis)
+    end
+
+    def test_with_month
+      d = @date_time.with_month(11)
+      assert_equal(2017, d.year)
+      assert_equal(11, d.month)
+      assert_equal(1, d.day)
+      assert_equal(13, d.hour)
+      assert_equal(14, d.minute)
+      assert_equal(15, d.second)
+      assert_equal(16, d.millis)
+    end
+
+    def test_with_month_too_high
+      assert_raises DateTimeException do
+        @date_time.with_month(13)
+      end
+    end
+
+    def test_with_month_too_low
+      assert_raises DateTimeException do
+        @date_time.with_month(0)
+      end
+    end
+
+    def test_with_day
+      d = @date_time.with_day(11)
+      assert_equal(2017, d.year)
+      assert_equal(12, d.month)
+      assert_equal(11, d.day)
+      assert_equal(13, d.hour)
+      assert_equal(14, d.minute)
+      assert_equal(15, d.second)
+      assert_equal(16, d.millis)
+    end
+
+    def test_with_day_too_high
+      assert_raises DateTimeException do
+        @date_time.with_day(32)
+      end
+    end
+
+    def test_with_day_too_low
+      assert_raises DateTimeException do
+        @date_time.with_day(0)
+      end
+    end
+
+    def test_with_hour
+      d = @date_time.with_hour(5)
+      assert_equal(2017, d.year)
+      assert_equal(12, d.month)
+      assert_equal(1, d.day)
+      assert_equal(5, d.hour)
+      assert_equal(14, d.minute)
+      assert_equal(15, d.second)
+      assert_equal(16, d.millis)
+    end
+
+    def test_with_hour_too_high
+      assert_raises DateTimeException do
+        @date_time.with_hour(60)
+      end
+    end
+
+    def test_with_hour_too_low
+      assert_raises DateTimeException do
+        @date_time.with_hour(-1)
+      end
+    end
+
+    ## TO_S
+
     def test_to_s
       assert_equal("2017-12-01T13:14:15.016", @date_time.to_s)
       assert_equal("2017-12-01T13:14:15.016", @date_time.format)

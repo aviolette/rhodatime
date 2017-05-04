@@ -28,15 +28,19 @@ module RhodaTime
     def millis ; @time.millis ; end
 
     def with_year(year)
-      LocalDateTime(@date.with_year(year), @time)
+      LocalDateTime.new(@date.with_year(year), @time)
     end
 
     def with_month(month)
-      LocalDateTime(@date.with_month(month), @time)
+      LocalDateTime.new(@date.with_month(month), @time)
     end
 
     def with_day(day)
-      LocalDateTime(@date.with_day(day), @time)
+      LocalDateTime.new(@date.with_day(day), @time)
+    end
+
+    def with_hour(hour)
+      LocalDateTime.new(@date, @time.with_hour(hour))
     end
 
     def with_minute(minutes)
