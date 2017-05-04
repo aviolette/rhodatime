@@ -27,17 +27,35 @@ module RhodaTime
 
     def millis ; @time.millis ; end
 
+    def with_year(year)
+      LocalDateTime(@date.with_year(year), @time)
+    end
+
+    def with_month(month)
+      LocalDateTime(@date.with_month(month), @time)
+    end
+
+    def with_day(day)
+      LocalDateTime(@date.with_day(day), @time)
+    end
+
+    def with_minute(minutes)
+      LocalDateTime.new(@date, @time.with_minute(minutes))
+    end
+
+    def with_second(seconds)
+      LocalDateTime.new(@date, @time.with_second(seconds))
+    end
+
     def with_millis(millis)
       LocalDateTime.new(@date, @time.with_millis(millis))
     end
 
-    def with_seconds(seconds)
-      LocalDateTime.new(@date, @time.with_second(seconds))
+    def format(formatter = DateTimeFormatter::ISO_LOCAL_DATE_TIME)
+      formatter.format self
     end
 
-    def with_minutes(minutes)
-      LocalDateTime.new(@date, @time.with_minute(minutes))
-    end
+    def to_s ; format ; end
 
     private
 

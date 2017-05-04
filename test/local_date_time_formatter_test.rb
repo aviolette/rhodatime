@@ -143,11 +143,11 @@ module RhodaTime
     end
 
     def test_local_time_no_seconds
-      assert_equal("09:13", DateTimeFormatter::ISO_LOCAL_TIME.format(@date_time1.with_millis(0).with_seconds(0)))
+      assert_equal("09:13", DateTimeFormatter::ISO_LOCAL_TIME.format(@date_time1.with_millis(0).with_second(0)))
     end
 
     def test_local_time_no_minutes
-      assert_equal("09:00", DateTimeFormatter::ISO_LOCAL_TIME.format(@date_time1.with_millis(0).with_seconds(0).with_minutes(0)))
+      assert_equal("09:00", DateTimeFormatter::ISO_LOCAL_TIME.format(@date_time1.with_millis(0).with_second(0).with_minute(0)))
     end
 
   end
