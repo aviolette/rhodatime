@@ -12,6 +12,7 @@ module RhodaTime
 
     ## Constants
 
+    BASIC_ISO_DATE = self.new('YYYYMMdd')
     ISO_LOCAL_DATE = self.new('YYYY-MM-dd')
     ISO_LOCAL_TIME = self.new('HH:mm[:ss[.SSS]]')
     ISO_LOCAL_DATE_TIME = self.new("YYYY-MM-ddTHH:mm[:ss[.SSS]]")
