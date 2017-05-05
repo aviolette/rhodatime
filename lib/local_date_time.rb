@@ -85,14 +85,22 @@ module RhodaTime
       plus_days -days
     end
 
-    def to_s ; format ; end
-
-    def to_epoch
-      t = Time.new(year, month, day, hour, minute, second + (millis / 1000), "+00:00")
-      (t.to_f * 1000).to_i
+    def plus_hours(hours)
+      LocalDateTime.from_epoch(to_epoch + (hours * 60 * 60 * 1000))
     end
 
+    def to_s ; format ; end
+
     private
+
+    def self.from_epoch(epoch)
+      LocalDateTime.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch))
+    end
+
+    def to_epoch
+      t = Time.new(year, month, day, hour, minute, second + (millis.to_f / 1000), "+00:00")
+      (t.to_f * 1000).to_i
+    end
 
     def initialize(date, time)
       @date = date

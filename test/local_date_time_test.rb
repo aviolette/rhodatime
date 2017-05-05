@@ -180,6 +180,18 @@ module RhodaTime
       assert_equal(16, dt.millis)
     end
 
+    def test_hours
+      dt = @date_time.plus_hours(28)
+      assert_equal(2017, dt.year)
+      assert_equal(12, dt.month)
+      assert_equal(2, dt.day)
+      assert_equal(17, dt.hour)
+      assert_equal(14, dt.minute)
+      assert_equal(15, dt.second)
+      assert_equal(16, dt.millis)
+
+    end
+
     ## TO_S
 
     def test_to_s
