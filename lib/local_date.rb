@@ -30,6 +30,11 @@ module RhodaTime
       LocalDateTime.of(year, month, day, 0, 0, 0, 0)
     end
 
+    # Returns the number of milliseconds since epoch time (assumes start of day with no zone offset)
+    def to_epoch
+      at_start_of_day.to_epoch
+    end
+
     # Returns a [LocalDateTime] object at the specified time
     # @param time [LocalTime] the time of day
     # @return [LocalDateTime] a combined date/time object
