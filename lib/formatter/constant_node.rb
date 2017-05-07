@@ -8,13 +8,9 @@ module RhodaTime
         @val = val
       end
 
-      def optional?
-        true
-      end
+      def optional? ; true ; end
 
-      def print(time)
-        @val
-      end
+      def print(time) ; @val ; end
     end
   end
 end
