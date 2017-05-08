@@ -63,11 +63,54 @@ module RhodaTime
       LocalDate.of(year, @month, @day)
     end
 
+    # Returns a new [LocalDate] with the number of years added to the current date
+    # @return [LocalDate] a date increased by the number of years
+    def plus_years(years)
+      with_year(year + years)
+    end
+
+    # Returns a new [LocalDate] with the number of years subtracted from the current date
+    # @return [LocalDate] a date decreased by the number of years
+    def minus_years(years)
+      plus_years -years
+    end
+
+    # Returns a new [LocalDate] with the number of months added to the current date
+    # @return [LocalDate] a date increased by the number of months
+    def plus_months(months)
+      plus_years(months / 12).with_month((months % 12) + month)
+    end
+
+    # Returns a new [LocalDate] with the number of months subtracted from the current date
+    # @return [LocalDate] a date decreased by the number of months
+    def minus_months(months)
+      plus_months -months
+    end
+
+    # Returns a new [LocalDate] with the number of days added to the current date
+    # @return [LocalDate] a date increased by the number of days
+    def plus_days(days)
+      LocalDate.from_epoch(to_epoch + (days * 86400000))
+    end
+
+    # Returns a new [LocalDate] with the number of days subtracted from the current date
+    # @return [LocalDate] a date decreased by the number of days
+    def minus_days(days)
+      plus_days -days
+    end
+
+    # Formats the date as a string (default is YYYY-MM-dd)
+    # @param formatter the formatter used to build the string
+    # @return the date in string format
     def format(formatter = DateTimeFormatter::ISO_LOCAL_DATE)
       formatter.format self
     end
 
     def to_s ; format ; end
+
+    def ==(other)
+      @year == other.year and @month == other.month and @day == other.day
+    end
 
     private
 

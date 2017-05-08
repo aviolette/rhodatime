@@ -61,7 +61,7 @@ module RhodaTime
     end
 
     def plus_years(years)
-      with_year(@date.year + years)
+      LocalDateTime.new(@date.plus_years(years), @time)
     end
 
     def minus_years(years)
@@ -69,7 +69,7 @@ module RhodaTime
     end
 
     def plus_months(months)
-      ## implement
+      LocalDateTime.new(@date.plus_months(months), @time)
     end
 
     def minus_months(months)
@@ -77,8 +77,7 @@ module RhodaTime
     end
 
     def plus_days(days)
-      epoch = to_epoch + (days * 86400000)
-      LocalDateTime.new(LocalDate.from_epoch(epoch), @time)
+      LocalDateTime.new(@date.plus_days(days), @time)
     end
 
     def minus_days(days)

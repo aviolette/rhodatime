@@ -122,5 +122,35 @@ module RhodaTime
       assert_equal("2017-03-14", d.format)
       assert_equal("2017-03-14", d.format(DateTimeFormatter::ISO_LOCAL_DATE))
     end
+
+    ## EQUAL
+
+    def test_equal
+      assert_equal(LocalDate.of(2017, 3, 14), LocalDate.of(2017, 3, 14))
+      assert(LocalDate.of(2017, 3, 14) != LocalDate.of(2017,2, 14))
+      assert(LocalDate.of(2017, 3, 14) == LocalDate.of(2017,3, 14))
+    end
+
+    ## PLUS_*
+
+    def test_plus_years
+      d = LocalDate.of(2017, 3, 14)
+      assert_equal(LocalDate.of(2021, 3, 14), d.plus_years(4))
+    end
+
+    def test_plus_months
+      d = LocalDate.of(2017, 3, 14)
+      assert_equal(LocalDate.of(2018, 3, 14), d.plus_months(12))
+      assert_equal(LocalDate.of(2018, 4, 14), d.plus_months(13))
+      assert_equal(LocalDate.of(2018, 5, 14), d.plus_months(14))
+      assert_equal(d, d.plus_months(0))
+    end
+
+    def test_minus_months
+      d = LocalDate.of(2017, 3, 14)
+      assert_equal(LocalDate.of(2014, 3, 14), d.minus_months(36))
+      assert_equal(LocalDate.of(2014, 4, 14), d.minus_months(35))
+      assert_equal(LocalDate.of(2016, 12, 14), d.minus_months(3))
+    end
   end
 end
