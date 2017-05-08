@@ -27,6 +27,12 @@ module RhodaTime
         time.month
       end
 
+      def parse(parse_item)
+        # todo implement parsing for larger formats of dates
+        raise DateTimeException, "Not implemented" if @size > 2
+        super(parse_item)
+      end
+
       def print(time)
         val = numeric_val(time)
         if @size == 5
@@ -40,6 +46,12 @@ module RhodaTime
         else
           val.to_s
         end
+      end
+
+      private
+
+      def modify_with
+        :with_month
       end
     end
   end

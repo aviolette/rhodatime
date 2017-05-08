@@ -16,6 +16,14 @@ module RhodaTime
       self.from_epoch(clock.now)
     end
 
+    # Parses a LocalDate from a string
+    # @param [String] a date string (e.g. "2017-05-14")
+    # @param [DateTimeFormatter] a formatter
+    # @return [LocalDate] that represents the parsed string
+    def self.parse(date_string, formatter = DateTimeFormatter::ISO_LOCAL_DATE)
+      formatter.parse date_string, LocalDate.of(1, 1, 1)
+    end
+
     # Builds a local date from epoch time
     # @param val [int] a millisecond representation of time from January 1, 1970
     # @return [LocalDate] a date object representing the specified epoch time with 0 TZ offset

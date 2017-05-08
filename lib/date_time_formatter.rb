@@ -20,5 +20,21 @@ module RhodaTime
     def format(time)
       @top_node.print time
     end
+
+    def parse(time_string, date_time)
+      item = ParseItem.new(date_time, time_string)
+      @top_node.parse item
+      item.date_time
+    end
+
+    private
+
+    class ParseItem
+      attr_accessor :date_time, :remainder
+
+      def initialize(date_time, remainder)
+        @date_time = date_time; @remainder = remainder
+      end
+    end
   end
 end

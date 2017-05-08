@@ -11,6 +11,13 @@ module RhodaTime
       def numeric_val(time)
         time.day
       end
+
+      private
+
+      def modify_with
+        :with_day
+      end
+
     end
   end
 end

@@ -14,6 +14,12 @@ module RhodaTime
         children << item
       end
 
+      def parse(parse_item)
+        @children.each do | node |
+          node.parse parse_item
+        end
+      end
+
       def print(time)
         @children.inject('') do | acc, node |
           acc << node.print(time)

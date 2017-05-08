@@ -150,5 +150,19 @@ module RhodaTime
       assert_equal("09:00", DateTimeFormatter::ISO_LOCAL_TIME.format(@date_time1.with_millis(0).with_second(0).with_minute(0)))
     end
 
+    def test_parse_yyyy_mm_dd
+      assert_equal(LocalDate.of(2017, 3, 14), DateTimeFormatter::ISO_LOCAL_DATE.parse('2017-03-14', LocalDate.new(1, 1, 1)))
+      assert_equal(LocalDate.of(201, 3, 14), DateTimeFormatter::ISO_LOCAL_DATE.parse('0201-03-14', LocalDate.new(1, 1, 1)))
+      assert_equal(LocalDate.of(20, 3, 14), DateTimeFormatter::ISO_LOCAL_DATE.parse('0020-03-14', LocalDate.new(1, 1, 1)))
+      assert_equal(LocalDate.of(2, 3, 14), DateTimeFormatter::ISO_LOCAL_DATE.parse('0002-03-14', LocalDate.new(1, 1, 1)))
+    end
+
+    def test_parse_yyyy_m_d
+      formatter = DateTimeFormatter.new("YYYY-M-d")
+      assert_equal(LocalDate.of(2017, 3, 14), formatter.parse('2017-3-14', LocalDate.new(1, 1, 1)))
+      assert_equal(LocalDate.of(201, 3, 14), formatter.parse('0201-3-14', LocalDate.new(1, 1, 1)))
+      assert_equal(LocalDate.of(20, 3, 1), formatter.parse('0020-3-1', LocalDate.new(1, 1, 1)))
+      assert_equal(LocalDate.of(2, 3, 14), formatter.parse('0002-3-14', LocalDate.new(1, 1, 1)))
+    end
   end
 end
