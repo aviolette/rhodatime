@@ -8,6 +8,7 @@ require_relative './hour_node'
 require_relative './minute_node'
 require_relative './second_node'
 require_relative './millis_node'
+require_relative './offset_node'
 
 module RhodaTime
   module Formatter
@@ -21,7 +22,8 @@ module RhodaTime
           'h' => HourNode,
           'm' => MinuteNode,
           's' => SecondNode,
-          'S' => MillisNode
+          'S' => MillisNode,
+          'x' => OffsetNode
       }
 
       def self.build_nodes(format)
