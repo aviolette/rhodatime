@@ -14,6 +14,10 @@ module RhodaTime
       self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch))
     end
 
+    def self.parse(date_time_string, formatter = DateTimeFormatter::ISO_LOCAL_DATE_TIME)
+      formatter.parse date_time_string, LocalDateTime.of(1, 1, 1, 0, 0)
+    end
+
     def year ; @date.year ; end
 
     def month ; @date.month ; end
@@ -91,11 +95,15 @@ module RhodaTime
     def to_s ; format ; end
 
     def to_epoch
-      t = Time.new(year, month, day, hour, minute, second + (millis.to_f / 1000), "+00:00")
+      t = Time.new(year, month, day, hour, minute, second + (millis.to_f / 1000), tz_format)
       (t.to_f * 1000).to_i
     end
 
     private
+
+    def tz_format
+      "+00:00"
+    end
 
     def self.from_epoch(epoch)
       LocalDateTime.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch))

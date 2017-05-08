@@ -21,7 +21,7 @@ module RhodaTime
       @top_node.print time
     end
 
-    def parse(time_string, date_time)
+    def parse(time_string, date_time = LocalDateTime.of(1, 1, 1, 0, 0))
       item = ParseItem.new(date_time, time_string)
       @top_node.parse item
       item.date_time

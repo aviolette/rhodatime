@@ -21,7 +21,7 @@ module RhodaTime
 
     def test_of_time_hours_out_of_bounds
       assert_raises DateTimeException do
-        ZoneOffset.of_time(24)
+        ZoneOffset.of_time(19)
       end
     end
 

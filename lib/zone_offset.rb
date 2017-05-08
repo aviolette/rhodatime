@@ -2,6 +2,8 @@ module RhodaTime
   class ZoneOffset
     attr_reader :offset_seconds
 
+    UTC = ZoneOffset.new
+
     OFFSET_FORMATTER = DateTimeFormatter.new("xxx")
 
     def self.of(id)
@@ -25,6 +27,12 @@ module RhodaTime
     def format(formatter = OFFSET_FORMATTER)
       formatter.format self
     end
+
+    def ==(other)
+      other.offset_seconds == @offset_seconds
+    end
+
+    def to_s ; format ; end
 
     private
 
