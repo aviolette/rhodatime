@@ -11,5 +11,10 @@ module RhodaTime
     def now
       DateTime.now.strftime('%Q').to_i
     end
+
+    # returns the offset in seconds from UTC
+    def offset
+      Time.now.utc_offset
+    end
   end
 end
