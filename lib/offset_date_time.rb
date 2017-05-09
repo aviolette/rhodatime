@@ -13,10 +13,10 @@ module RhodaTime
 
     def self.now(clock = Clock.instance)
       epoch = clock.now
-      self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), clock.default_zone)
+      self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), ZoneOffset.from_seconds(clock.offset))
     end
 
-    def self.parse(date_time_string, formatter = DateTimeFormatter::ISO_LOCAL_DATE_TIME)
+    def self.parse(date_time_string, formatter = DateTimeFormatter::ISO_OFFSET_DATE_TIME)
       formatter.parse date_time_string, OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset::UTC)
     end
 
@@ -48,6 +48,10 @@ module RhodaTime
       OffsetDateTime.new(@date, @time.with_millis(millis), @offset)
     end
 
+    def with_offset(offset)
+      OffsetDateTime.new(@date, @time, offset)
+    end
+
     def format(formatter = DateTimeFormatter::ISO_OFFSET_DATE_TIME)
       formatter.format self
     end
@@ -68,14 +72,24 @@ module RhodaTime
       OffsetDateTime.from_epoch(to_epoch + (hours * 60 * 60 * 1000), @offset)
     end
 
+    def offset_seconds
+      @offset.offset_seconds
+    end
+
+    def ==(other)
+      false
+    end
+
     def to_s ; format ; end
 
     private
 
-    def tz_format ; format ; end
+    def tz_format ; @offset.format ; end
 
     def self.from_epoch(epoch, offset)
-      # TODO: implement
+      dt = LocalDateTime.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch))
+      epoch = dt.to_epoch + (offset.offset_seconds * 1000)
+      OffsetDateTime.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), offset)
     end
 
     def initialize(date, time, offset)

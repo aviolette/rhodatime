@@ -16,6 +16,7 @@ module RhodaTime
     ISO_LOCAL_DATE = self.new('YYYY-MM-dd')
     ISO_LOCAL_TIME = self.new('HH:mm[:ss[.SSS]]')
     ISO_LOCAL_DATE_TIME = self.new("YYYY-MM-ddTHH:mm[:ss[.SSS]]")
+    ISO_OFFSET_DATE_TIME = self.new("YYYY-MM-ddTHH:mm[:ss[.SSS]]xxx")
 
     def format(time)
       @top_node.print time

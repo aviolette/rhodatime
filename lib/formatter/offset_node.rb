@@ -8,7 +8,10 @@ module RhodaTime
       end
 
       def parse(item)
-        # implement
+        # TODO: this only handles size of 3
+        hour = item[1..2]; second = [3..4]
+        puts "#{hour}:#{second}"
+
       end
 
       def print(time)
@@ -19,6 +22,12 @@ module RhodaTime
         seconds = seconds.abs % (60 * 60)
         minutes = seconds / 60
         buf << twopad(hours) << ":" << twopad(minutes)
+      end
+
+      private
+
+      def modify_with
+        :with_offset
       end
     end
   end

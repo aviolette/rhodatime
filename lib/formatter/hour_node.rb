@@ -12,6 +12,12 @@ module RhodaTime
         time.hour
       end
 
+      private
+
+      def modify_with
+        :with_hour
+      end
+
     end
   end
 end

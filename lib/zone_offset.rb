@@ -7,6 +7,7 @@ module RhodaTime
     OFFSET_FORMATTER = DateTimeFormatter.new("xxx")
 
     def self.of(id)
+      raise DateTimeException, "of() is not implemented yet"
       # implement
     end
 
@@ -18,6 +19,10 @@ module RhodaTime
         minutes = -(minutes.abs)
       end
       self.new((hours * 60 * 60) + (minutes * 60) + seconds)
+    end
+
+    def self.from_seconds(offset_seconds)
+      self.new(offset_seconds)
     end
 
     def self.parse(date_string, formatter = OFFSET_FORMATTER)

@@ -34,7 +34,7 @@ module RhodaTime
       private
 
       def modify_with
-        raise DateTimeException, "Not implemented"
+        raise DateTimeException, "Not implemented #{self.inspect}"
       end
 
       def twopad(item)
