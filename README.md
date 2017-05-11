@@ -59,6 +59,16 @@ Local times:
 
 Local date-times:
 ````
+> dt = LocalDateTime.now
+
+> dt = LocalDateTime.of(2017, 6, 12, 21, 30, 50, 4)
+
+> dt.to_s
+"2017-05-11T16:08:50.004"
+
+> dt.plus_days(32).plus_hours(5).with_minute(30).to_s
+"2017-06-12T21:30:50.004" 
+
 ````
 
 ## Development

@@ -10,7 +10,7 @@ module RhodaTime
     end
 
     def self.now(clock = Clock.instance)
-      epoch = clock.now
+      epoch = clock.now + (clock.offset * 1000)
       self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch))
     end
 

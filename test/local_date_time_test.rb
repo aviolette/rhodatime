@@ -29,6 +29,16 @@ module RhodaTime
       assert_equal(0, d.second)
     end
 
+    def test_local_now_other_zone
+      d = RhodaTime::LocalDateTime.now(clock=FakeClock.new(1483228800000, -18000))
+      assert_equal(2016, d.year)
+      assert_equal(12, d.month)
+      assert_equal(31, d.day)
+      assert_equal(19, d.hour)
+      assert_equal(0, d.minute)
+      assert_equal(0, d.second)
+    end
+
     def test_with_year
       d = @date_time.with_year(1444)
       assert_equal(1444, d.year)
