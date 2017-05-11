@@ -28,6 +28,7 @@ A clock is an abstraction of the system clock.  It keeps track of current epoch 
 ````
 > Clock.instance.now
 1494507010522 # epoch time in millis
+
 > Clock.instance.offset
 -18000 # offset of current zone in seconds
 ````
@@ -39,11 +40,15 @@ Local dates, times, and date-times are representations of times without a time z
 Local dates:
 ````
 > date = LocalDate.now             # the current date
+
 > date = LocalDate.of(2017, 5, 3)  # a specific date
+
 > date.year
 2017
+
 >  date.with_year(2018).minus_months(22).plus_days(5).to_s
 "2016-07-08"
+
 > date.at_start_of_day.to_s
  "2017-05-03T00:00"  
 ````
