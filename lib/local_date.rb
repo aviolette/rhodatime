@@ -92,7 +92,7 @@ module RhodaTime
     # Returns a new [LocalDate] with the number of months subtracted from the current date
     # @return [LocalDate] a date decreased by the number of months
     def minus_months(months)
-      plus_months -months
+      plus_years(-(months / 12)).with_month(month - (months % 12))
     end
 
     # Returns a new [LocalDate] with the number of days added to the current date

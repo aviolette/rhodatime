@@ -15,31 +15,45 @@ Time library for Ruby that mimics the semantics of Java's Joda-Time and Java Tim
 
 ## Usage
 
-All classes in RhodaTime are in the RhodaTime namespace.  If you are heavily using these classes, you
-can dereference the namespace by using include
+All classes in RhodaTime are in the RhodaTime namespace.  If you are heavily using these classes, you can dereference the namespace by using include
 
 ````
 include RhodaTime
+````
+
+### Clock
+
+A clock is an abstraction of the system clock.  It keeps track of current epoch time and zones.  There is a FakeClock instance in the test directory that can be used for testing.
+
+````
+> Clock.instance.now
+1494507010522 # epoch time in millis
+> Clock.instance.offset
+-18000 # offset of current zone in seconds
 ````
 
 ### Local Dates, Times, Date-times
 
 Local dates, times, and date-times are representations of times without a time zone.
 
+Local dates:
 ````
-> date = LocalDate.of(2017, 5, 3)
+> date = LocalDate.now             # the current date
+> date = LocalDate.of(2017, 5, 3)  # a specific date
 > date.year
 2017
-> date = date.plus_years(5)
- #<RhodaTime::LocalDate:0x007fa45f248078 @year=2022, @month=5, @day=3>
-> date = date.minus_months(22).minus_days(5)
- #<RhodaTime::LocalDate:0x007f892e1c9760 @year=2020, @month=6, @day=28> 
-> date.to_s
- "2020-06-28"
-> date.at_start_of_day
- #<RhodaTime::LocalDateTime:0x007f892e1c0098 @date=#<RhodaTime::LocalDate:0x007f892e1c00e8 @year=2020, @month=6, @day=28>, @time=#<RhodaTime::LocalTime:0x007f892e1c00c0 @hour=0, @minute=0, @second=0, @millis=0>>
+>  date.with_year(2018).minus_months(22).plus_days(5).to_s
+"2016-07-08"
 > date.at_start_of_day.to_s
- "2020-06-28T00:00"  
+ "2017-05-03T00:00"  
+````
+
+Local times:
+````
+````
+
+Local date-times:
+````
 ````
 
 ## Development
