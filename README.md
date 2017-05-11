@@ -1,6 +1,6 @@
 # RhodaTime
 
-This is in development
+Like Joda-Time but for Ruby.
 
 ## Overview
 
@@ -14,6 +14,14 @@ Time library for Ruby that mimics the semantics of Java's Joda-Time and Java Tim
 * Clock for abstracting system time and time zone
 
 ## Usage
+
+All classes in RhodaTime are in the RhodaTime namespace.  If you are heavily using these classes, you
+can dereference the namespace by using include
+
+````
+include RhodaTime
+````
+
 ### Local Dates, Times, Date-times
 
 Local dates, times, and date-times are representations of times without a time zone.
