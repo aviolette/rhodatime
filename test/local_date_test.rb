@@ -148,9 +148,21 @@ module RhodaTime
 
     def test_minus_months
       d = LocalDate.of(2017, 3, 14)
+      assert_equal(LocalDate.of(2017, 2, 14), d.minus_months(1))
+      assert_equal(LocalDate.of(2017, 1, 14), d.minus_months(2))
+      assert_equal(LocalDate.of(2016, 12, 14), d.minus_months(3))
+      assert_equal(LocalDate.of(2016, 11, 14), d.minus_months(4))
+      assert_equal(LocalDate.of(2016, 10, 14), d.minus_months(5))
+      assert_equal(LocalDate.of(2016, 9, 14), d.minus_months(6))
+      assert_equal(LocalDate.of(2016, 8, 14), d.minus_months(7))
+      assert_equal(LocalDate.of(2016, 7, 14), d.minus_months(8))
+      assert_equal(LocalDate.of(2016, 6, 14), d.minus_months(9))
+      assert_equal(LocalDate.of(2016, 5, 14), d.minus_months(10))
+      assert_equal(LocalDate.of(2016, 4, 14), d.minus_months(11))
+      assert_equal(LocalDate.of(2016, 3, 14), d.minus_months(12))
+      assert_equal(LocalDate.of(2016, 2, 14), d.minus_months(13))
       assert_equal(LocalDate.of(2014, 3, 14), d.minus_months(36))
       assert_equal(LocalDate.of(2014, 4, 14), d.minus_months(35))
-      assert_equal(LocalDate.of(2016, 12, 14), d.minus_months(3))
     end
   end
 end
