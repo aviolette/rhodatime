@@ -13,7 +13,7 @@ module RhodaTime
 
     # Returns a [LocalDate] on the specified clock
     def self.now(clock = Clock.instance)
-      self.from_epoch(clock.now)
+      self.from_epoch(clock.now + (clock.offset * 1000))
     end
 
     # Parses a LocalDate from a string

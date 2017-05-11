@@ -10,7 +10,7 @@ module RhodaTime
     attr_reader :hour, :minute, :second, :millis
 
     def self.now(clock = Clock.instance)
-      self.from_epoch(clock.now)
+      self.from_epoch(clock.now + (clock.offset * 1000))
     end
 
     def self.of(hour, minute, second = 0, millis = 0)

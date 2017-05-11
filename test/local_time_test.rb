@@ -60,6 +60,14 @@ module RhodaTime
       assert_equal(312, t.millis)
     end
 
+
+    def test_local_now_other_zone
+      d = LocalTime.now(clock=FakeClock.new(1483228800000, -18000))
+      assert_equal(19, d.hour)
+      assert_equal(0, d.minute)
+      assert_equal(0, d.second)
+    end
+
     ## AFTER?
 
     def test_after_same_hour
