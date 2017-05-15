@@ -92,6 +92,18 @@ module RhodaTime
       LocalDateTime.from_epoch(to_epoch + (hours * 60 * 60 * 1000))
     end
 
+    def minus_hours(hours)
+      plus_hours -hours
+    end
+
+    def plus_minutes(minutes)
+      LocalDateTime.from_epoch(to_epoch + (minutes * 60 * 1000))
+    end
+
+    def minus_minutes(minutes)
+      plus_minutes -minutes
+    end
+
     def to_s ; format ; end
 
     def to_epoch
