@@ -44,7 +44,6 @@ module RhodaTime
       assert_equal(31, d.day)
     end
 
-
     ## AT START OF DAY
 
     def test_at_start_of_day
@@ -81,6 +80,7 @@ module RhodaTime
       assert_equal(3, d.month)
       assert_equal(14, d.day)
     end
+    
     ## WITH_MONTH
 
     def test_with_month
