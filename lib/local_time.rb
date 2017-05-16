@@ -89,6 +89,10 @@ module RhodaTime
       other.hour == @hour and other.minute == @minute and other.second == @second and other.millis == @millis
     end
 
+    def ==(other)
+      same? other
+    end
+
     # Returns true if the other time is before the current time
     # @param other [LocalTime] another time object
     # @return [true, false] true if the other time is before this time

@@ -11,6 +11,10 @@ module RhodaTime
         time.millis
       end
 
+      def modify_with
+        :with_millis
+      end
+
       def print(time)
         if @size == 1
           numeric_val(time).to_s

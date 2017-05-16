@@ -36,6 +36,10 @@ module RhodaTime
       def initialize(date_time, remainder)
         @date_time = date_time; @remainder = remainder
       end
+
+      def copy
+        ParseItem.new(@date_time, @remainder)
+      end
     end
   end
 end

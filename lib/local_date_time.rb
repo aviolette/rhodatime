@@ -5,6 +5,8 @@ require_relative './local_time'
 module RhodaTime
   class LocalDateTime
 
+    attr_reader :date, :time
+
     def self.of(year, month, day, hour, minute, second=0, millis=0)
       self.new(LocalDate.of(year, month, day), LocalTime.of(hour, minute, second, millis))
     end

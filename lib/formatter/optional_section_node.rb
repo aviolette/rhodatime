@@ -18,6 +18,20 @@ module RhodaTime
         true
       end
 
+      def matches?(item)
+        item = item.copy
+        @children.all? do | node |
+          node.matches?(item)
+        end
+      end
+
+      def parse(parse_item)
+        @children.each do | node |
+          return unless node.matches? parse_item.copy
+          node.parse(parse_item)
+        end
+      end
+
       def print(time)
         return '' unless @children.all? { |item| item.optional? or item.numeric_val(time) != 0 }
         @children.inject('') do | acc, node |

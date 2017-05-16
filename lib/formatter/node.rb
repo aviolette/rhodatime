@@ -12,10 +12,21 @@ module RhodaTime
         end
       end
 
+      def matches?(parse_item)
+        matched = Regexp.new("\\d{#{@size}}").match(parse_item.remainder[0..@size])
+        if matched
+          parse parse_item
+        end
+        matched
+      end
+
       def parse(parse_item)
         if @size == 2
           parse_item.date_time = parse_item.date_time.send(modify_with, parse_item.remainder[0..2].to_i)
           parse_item.remainder = parse_item.remainder[2..parse_item.remainder.length]
+        elsif @size == 3
+          parse_item.date_time = parse_item.date_time.send(modify_with, parse_item.remainder[0..3].to_i)
+          parse_item.remainder = parse_item.remainder[3..parse_item.remainder.length]
         else
           md = /^(\d{1,2})/.match(parse_item.remainder)
           parse_item.date_time = parse_item.date_time.send(modify_with, md[0].to_i)

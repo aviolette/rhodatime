@@ -9,9 +9,10 @@ module RhodaTime
 
       def parse(item)
         # TODO: this only handles size of 3
-        hour = item[1..2]; second = [3..4]
-        puts "#{hour}:#{second}"
-
+        hour = item.remainder[1..2].to_i; minutes = item.remainder[4..5].to_i
+        sign = item.remainder[0..0]
+        hour = -hour if sign == '-'
+        item.date_time = item.date_time.with_offset(ZoneOffset.of_time(hour.to_i, minutes.to_i))
       end
 
       def print(time)

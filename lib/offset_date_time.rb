@@ -77,8 +77,7 @@ module RhodaTime
     end
 
     def ==(other)
-      # TODO fix
-      false
+      @date == other.date and @time == other.time and @offset == other.offset
     end
 
     def to_s ; format ; end

@@ -11,6 +11,11 @@ module RhodaTime
       def numeric_val(time)
         time.second
       end
+
+      def modify_with
+        :with_second
+      end
+
     end
   end
 end
