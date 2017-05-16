@@ -31,6 +31,9 @@ module RhodaTime
 
     def test_parse
       assert_equal(@od, OffsetDateTime.parse("2015-05-13T14:15:16.017-05:00"))
+      assert_equal(OffsetDateTime.of(2015,5,13,14,15,16,0, ZoneOffset.of_time(-5)), OffsetDateTime.parse("2015-05-13T14:15:16-05:00") )
+      assert_equal(OffsetDateTime.of(2015,5,13,14,15,0,0, ZoneOffset.of_time(-5)), OffsetDateTime.parse("2015-05-13T14:15-05:00") )
+      assert_equal(OffsetDateTime.of(2015,5,13,14,15,0,0, ZoneOffset.of_time(5)), OffsetDateTime.parse("2015-05-13T14:15+05:00") )
     end
   end
 end
