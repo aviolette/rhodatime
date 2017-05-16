@@ -71,6 +71,50 @@ Local date-times:
 
 ````
 
+### Offset times
+
+Local date/times represent time without an offset.  OffsetDateTime represents time with an offset from UTC.  This offset is internally represented as an offset in seconds.
+
+
+ZoneOffset abstracts a numeric offset from UTC.
+````
+> ZoneOffset.of_time(-5).to_s     # minus five hours from UTC
+"-05:00"
+
+> ZoneOffset.of_time(5, 45).to_s  # plus five hours and 45 minutes from UTC 
+"+05:45"
+
+> ZoneOffset.of_time(5, 45).offset_seconds
+20700 
+````
+
+Create an OffsetDateTime from a LocalDateTime 
+ ````
+ > dt = LocalDateTime.of(2015, 10, 5, 10, 1, 2, 3)
+ 
+ > dt.to_s
+ "2015-10-05T10:01:02.003" 
+ 
+ > dt.apply_offset(ZoneOffset.of_time(-5)).to_s
+ "2015-10-05T05:01:02.003-05:00"
+ ````
+
+Create an OffsetDateTime at current time with current zone
+
+````
+> OffsetDateTime.now.to_s
+"2017-05-16T17:07:58.508-05:00" 
+
+> OffsetDateTime.now.offset.to_s
+"-05:00"
+````
+
+Create an OffsetDateTime from an ISO string
+````
+> OffsetDateTime.parse("2017-05-16T17:07:58.508-05:00")
+#<RhodaTime::OffsetDateTime:0x007fc0fba0bb80 @date=#<RhodaTime::LocalDate:0x007fc0fba11080 @year=2017, @month=5, @day=16>, @time=#<RhodaTime::LocalTime:0x007fc0fba0bd10 @hour=17, @minute=7, @second=58, @millis=508>, @offset=#<RhodaTime::ZoneOffset:0x007fc0fba0bba8 @offset_seconds=-18000>> 
+````
+
 ## Development
 
 To test locally:
