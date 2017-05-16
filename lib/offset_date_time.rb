@@ -11,9 +11,13 @@ module RhodaTime
       self.new(LocalDate.of(year, month, day), LocalTime.of(hour, minute, second, millis), offset)
     end
 
+    def self.of_epoch(epoch, offset)
+      epoch = epoch + (offset.offset_seconds * 1000)
+      self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), offset)
+    end
+
     def self.now(clock = Clock.instance)
-      epoch = clock.now + (clock.offset * 1000)
-      self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), ZoneOffset.from_seconds(clock.offset))
+      of_epoch clock.now, ZoneOffset.from_seconds(clock.offset)
     end
 
     def self.parse(date_time_string, formatter = DateTimeFormatter::ISO_OFFSET_DATE_TIME)
@@ -69,7 +73,7 @@ module RhodaTime
     end
 
     def plus_hours(hours)
-      OffsetDateTime.from_epoch(to_epoch + (hours * 60 * 60 * 1000), @offset)
+      OffsetDateTime.of_epoch(to_epoch + (hours * 60 * 60 * 1000), @offset)
     end
 
     def offset_seconds
@@ -85,12 +89,6 @@ module RhodaTime
     private
 
     def tz_format ; @offset.format ; end
-
-    def self.from_epoch(epoch, offset)
-      dt = LocalDateTime.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch))
-      epoch = dt.to_epoch + (offset.offset_seconds * 1000)
-      OffsetDateTime.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), offset)
-    end
 
     def initialize(date, time, offset)
       super(date, time)

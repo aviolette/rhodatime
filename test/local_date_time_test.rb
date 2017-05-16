@@ -202,6 +202,30 @@ module RhodaTime
 
     end
 
+    def test_apply_offset
+      dt = @date_time.apply_offset(ZoneOffset.of_time(-5))
+      assert_equal(2017, dt.year)
+      assert_equal(12, dt.month)
+      assert_equal(1, dt.day)
+      assert_equal(8, dt.hour)
+      assert_equal(14, dt.minute)
+      assert_equal(15, dt.second)
+      assert_equal(16, dt.millis)
+      assert_equal(ZoneOffset.of_time(-5), dt.offset)
+    end
+
+    def test_apply_offset2
+      dt = @date_time.apply_offset(ZoneOffset.of_time(17))
+      assert_equal(2017, dt.year)
+      assert_equal(12, dt.month)
+      assert_equal(2, dt.day)
+      assert_equal(6, dt.hour)
+      assert_equal(14, dt.minute)
+      assert_equal(15, dt.second)
+      assert_equal(16, dt.millis)
+      assert_equal(ZoneOffset.of_time(17), dt.offset)
+    end
+
     ## TO_S
 
     def test_to_s

@@ -19,6 +19,16 @@ module RhodaTime
       assert_equal(ZoneOffset.of_time(-5), @od.offset)
     end
 
+    def test_of_epoch
+      od = OffsetDateTime.of_epoch(1494969109000, ZoneOffset.of_time(-5))
+      assert_equal(OffsetDateTime.of(2017, 5, 16, 16, 11, 49, 0, ZoneOffset.of_time(-5)), od)
+    end
+
+    def test_of_epoch2
+      od = OffsetDateTime.of_epoch(1494969109000, ZoneOffset.of_time(5))
+      assert_equal(OffsetDateTime.of(2017, 5, 17, 2, 11, 49, 0, ZoneOffset.of_time(5)), od)
+    end
+
     def test_equal
       assert_equal(@od, OffsetDateTime.of(2015, 5, 13, 14, 15, 16, 17, ZoneOffset.of_time(-5)))
     end

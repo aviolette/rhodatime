@@ -106,6 +106,10 @@ module RhodaTime
       plus_minutes -minutes
     end
 
+    def apply_offset(offset)
+      OffsetDateTime.of_epoch(to_epoch, offset)
+    end
+
     def to_s ; format ; end
 
     def to_epoch
