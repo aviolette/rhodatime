@@ -73,7 +73,7 @@ module RhodaTime
     end
 
     def plus_hours(hours)
-      OffsetDateTime.of_epoch(to_epoch + (hours * 60 * 60 * 1000), @offset)
+      self.of_epoch_with_no_adjustment(to_epoch + (hours * 60 * 60 * 1000), @offset)
     end
 
     def offset_seconds
@@ -87,6 +87,10 @@ module RhodaTime
     def to_s ; format ; end
 
     private
+
+    def self.of_epoch_with_no_adjustment(epoch, offset)
+      self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), offset)
+    end
 
     def tz_format ; @offset.format ; end
 

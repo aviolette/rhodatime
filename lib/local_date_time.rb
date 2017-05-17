@@ -102,6 +102,10 @@ module RhodaTime
       LocalDateTime.from_epoch(to_epoch + (minutes * 60 * 1000))
     end
 
+    def plus_millis(millis)
+      LocalDateTime.from_epoch(to_epoch + millis)
+    end
+
     def minus_minutes(minutes)
       plus_minutes -minutes
     end
@@ -110,11 +114,23 @@ module RhodaTime
       OffsetDateTime.of_epoch(to_epoch, offset)
     end
 
+    def plus(temporal)
+      plus_millis(temporal.to_millis)
+    end
+
+    def after?(other)
+      to_epoch > other.to_epoch
+    end
+
     def to_s ; format ; end
 
     def to_epoch
       t = Time.new(year, month, day, hour, minute, second + (millis.to_f / 1000), tz_format)
       (t.to_f * 1000).to_i
+    end
+
+    def range_until(end_time)
+      TimeRange.new(self, end_time)
     end
 
     private
