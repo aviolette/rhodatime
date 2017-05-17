@@ -28,6 +28,7 @@ module RhodaTime
       plus_hours -hours
     end
 
+    # Returns a new instance with the number of days added to the current date
     def plus_days(days)
       self.class.from_epoch_with_self(self.to_epoch + Duration.of_days(days).to_millis, self)
     end

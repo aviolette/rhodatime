@@ -10,6 +10,15 @@ module RhodaTime
       @from = from; @to = to
     end
 
+    def inject_on_interval(duration, acc, &block)
+      current = from
+      until current.after?(to) do
+        block.call(acc, current)
+        current = current.plus(duration)
+      end
+      acc
+    end
+
     def on_interval(duration, &block)
       current = from
       until current.after?(to) do

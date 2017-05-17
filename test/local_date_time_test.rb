@@ -238,10 +238,20 @@ module RhodaTime
     end
 
     def test_on_interval
-#      @date_time.range_until(@date_time.plus_days(4))
-#          .on_interval(Duration.of_millis(60000)) do |time|
-#        puts time.to_s
-#      end
+      acc = ""
+      @date_time.range_until(@date_time.plus_days(4))
+          .on_interval(Duration.of_hours(12)) do |time|
+        acc << time.to_s
+      end
+      assert_equal("2017-12-01T13:14:15.0162017-12-02T01:14:15.0162017-12-02T13:14:15.0162017-12-03T01:14:15.0162017-12-03T13:14:15.0162017-12-04T01:14:15.0162017-12-04T13:14:15.0162017-12-05T01:14:15.0162017-12-05T13:14:15.016", acc)
+    end
+
+    def test_inject_on_interval
+      foo = @date_time.range_until(@date_time.plus_days(4))
+          .inject_on_interval(Duration.of_hours(12), "") do |acc, time|
+        acc << time.to_s
+      end
+      assert_equal("2017-12-01T13:14:15.0162017-12-02T01:14:15.0162017-12-02T13:14:15.0162017-12-03T01:14:15.0162017-12-03T13:14:15.0162017-12-04T01:14:15.0162017-12-04T13:14:15.0162017-12-05T01:14:15.0162017-12-05T13:14:15.016", foo)
     end
 
     ## TO_S
