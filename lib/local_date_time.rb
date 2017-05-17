@@ -87,10 +87,6 @@ module RhodaTime
       OffsetDateTime.of_epoch(to_epoch, offset)
     end
 
-    def after?(other)
-      to_epoch > other.to_epoch
-    end
-
     def to_s ; format ; end
 
     def to_epoch

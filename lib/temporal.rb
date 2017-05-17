@@ -1,19 +1,19 @@
 module RhodaTime
   module Temporal
     def plus(amount)
-      self.class.from_epoch_with_self(self.to_epoch + amount.to_millis, self)
+      self.class.from_epoch_with_self(to_epoch + amount.to_millis, self)
     end
 
     def plus_millis(millis)
-      self.class.from_epoch_with_self(self.to_epoch + millis, self)
+      self.class.from_epoch_with_self(to_epoch + millis, self)
     end
 
     def plus_seconds(seconds)
-      self.class.from_epoch_with_self(self.to_epoch + Duration.of_seconds(seconds).to_millis, self)
+      self.class.from_epoch_with_self(to_epoch + Duration.of_seconds(seconds).to_millis, self)
     end
 
     def plus_minutes(minutes)
-      self.class.from_epoch_with_self(self.to_epoch + Duration.of_minutes(minutes).to_millis, self)
+      self.class.from_epoch_with_self(to_epoch + Duration.of_minutes(minutes).to_millis, self)
     end
 
     def minus_minutes(minutes)
@@ -21,7 +21,7 @@ module RhodaTime
     end
 
     def plus_hours(hours)
-      self.class.from_epoch_with_self(self.to_epoch + Duration.of_hours(hours).to_millis, self)
+      self.class.from_epoch_with_self(to_epoch + Duration.of_hours(hours).to_millis, self)
     end
 
     def minus_hours(hours)
@@ -35,6 +35,14 @@ module RhodaTime
 
     def minus_days(days)
       plus_days -days
+    end
+
+    def after?(other)
+      to_epoch > other.to_epoch
+    end
+
+    def before?(other)
+      other.to_epoch > t_epoch
     end
   end
 end
