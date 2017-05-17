@@ -2,11 +2,11 @@ require 'time'
 require_relative './local_date'
 require_relative './local_time'
 require_relative './temporal'
-module RhodaTime
-  class LocalDateTime
-    include Temporal
+require_relative './date_time'
 
-    attr_reader :date, :time
+module RhodaTime
+  class LocalDateTime < DateTime
+    include Temporal
 
     def self.of(year, month, day, hour, minute, second=0, millis=0)
       self.new(LocalDate.of(year, month, day), LocalTime.of(hour, minute, second, millis))
@@ -21,47 +21,6 @@ module RhodaTime
       formatter.parse date_time_string, LocalDateTime.of(1, 1, 1, 0, 0)
     end
 
-    def year ; @date.year ; end
-
-    def month ; @date.month ; end
-
-    def day ; @date.day ; end
-
-    def hour ; @time.hour ; end
-
-    def minute ; @time.minute ; end
-
-    def second ; @time.second ; end
-
-    def millis ; @time.millis ; end
-
-    def with_year(year)
-      LocalDateTime.new(@date.with_year(year), @time)
-    end
-
-    def with_month(month)
-      LocalDateTime.new(@date.with_month(month), @time)
-    end
-
-    def with_day(day)
-      LocalDateTime.new(@date.with_day(day), @time)
-    end
-
-    def with_hour(hour)
-      LocalDateTime.new(@date, @time.with_hour(hour))
-    end
-
-    def with_minute(minutes)
-      LocalDateTime.new(@date, @time.with_minute(minutes))
-    end
-
-    def with_second(seconds)
-      LocalDateTime.new(@date, @time.with_second(seconds))
-    end
-
-    def with_millis(millis)
-      LocalDateTime.new(@date, @time.with_millis(millis))
-    end
 
     def format(formatter = DateTimeFormatter::ISO_LOCAL_DATE_TIME)
       formatter.format self
@@ -106,6 +65,10 @@ module RhodaTime
 
     def self.from_epoch_with_self(epoch, current)
       from_epoch(epoch)
+    end
+
+    def self.from_date_time_with_self(date, time, current)
+      self.new(date, time)
     end
 
     def self.from_epoch(epoch)

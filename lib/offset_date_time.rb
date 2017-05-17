@@ -1,9 +1,10 @@
 require 'time'
 require_relative './local_date_time'
 require_relative './zone_offset'
+require_relative './date_time'
 
 module RhodaTime
-  class OffsetDateTime < LocalDateTime
+  class OffsetDateTime < DateTime
 
     attr_reader :offset
 
@@ -24,56 +25,12 @@ module RhodaTime
       formatter.parse date_time_string, OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset::UTC)
     end
 
-    def with_year(year)
-      OffsetDateTime.new(@date.with_year(year), @time, @offset)
-    end
-
-    def with_month(month)
-      OffsetDateTime.new(@date.with_month(month), @time, @offset)
-    end
-
-    def with_day(day)
-      OffsetDateTime.new(@date.with_day(day), @time, @offset)
-    end
-
-    def with_hour(hour)
-      OffsetDateTime.new(@date, @time.with_hour(hour), @offset)
-    end
-
-    def with_minute(minutes)
-      OffsetDateTime.new(@date, @time.with_minute(minutes), @offset)
-    end
-
-    def with_second(seconds)
-      OffsetDateTime.new(@date, @time.with_second(seconds), @offset)
-    end
-
-    def with_millis(millis)
-      OffsetDateTime.new(@date, @time.with_millis(millis), @offset)
-    end
-
-    def with_offset(offset)
-      OffsetDateTime.new(@date, @time, offset)
-    end
-
     def format(formatter = DateTimeFormatter::ISO_OFFSET_DATE_TIME)
       formatter.format self
     end
 
-    def plus_years(years)
-      OffsetDateTime.new(@date.plus_years(years), @time, @offset)
-    end
-
-    def plus_months(months)
-      OffsetDateTime.new(@date.plus_months(months), @time, @offset)
-    end
-
-    def plus_days(days)
-      OffsetDateTime.new(@date.plus_days(days), @time, @offset)
-    end
-
-    def plus_hours(hours)
-      self.of_epoch_with_no_adjustment(to_epoch + (hours * 60 * 60 * 1000), @offset)
+    def with_offset(offset)
+      OffsetDateTime.new(@date, @time, offset)
     end
 
     def offset_seconds
@@ -88,8 +45,16 @@ module RhodaTime
 
     private
 
+    def self.from_epoch_with_self(epoch, current)
+      self.of_epoch_with_no_adjustment(epoch, current)
+    end
+
     def self.of_epoch_with_no_adjustment(epoch, offset)
       self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), offset)
+    end
+
+    def self.from_date_time_with_self(date, time, current)
+      self.new(date, time, current.offset)
     end
 
     def tz_format ; @offset.format ; end

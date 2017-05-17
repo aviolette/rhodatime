@@ -9,7 +9,7 @@ module RhodaTime
 
     # returns the epoch time in milliseconds
     def now
-      DateTime.now.strftime('%Q').to_i
+      ::DateTime.now.strftime('%Q').to_i
     end
 
     # returns the offset in seconds from UTC
