@@ -226,6 +226,17 @@ module RhodaTime
       assert_equal(ZoneOffset.of_time(17), dt.offset)
     end
 
+    def test_plus
+      dt = @date_time.plus(Duration.of_hours(13))
+      assert_equal(2017, dt.year)
+      assert_equal(12, dt.month)
+      assert_equal(2, dt.day)
+      assert_equal(2, dt.hour)
+      assert_equal(14, dt.minute)
+      assert_equal(15, dt.second)
+      assert_equal(16, dt.millis)
+    end
+
     def test_on_interval
 #      @date_time.range_until(@date_time.plus_days(4))
 #          .on_interval(Duration.of_millis(60000)) do |time|

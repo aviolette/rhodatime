@@ -1,9 +1,10 @@
 require 'time'
 require_relative './local_date'
 require_relative './local_time'
-
+require_relative './temporal'
 module RhodaTime
   class LocalDateTime
+    include Temporal
 
     attr_reader :date, :time
 
@@ -82,40 +83,8 @@ module RhodaTime
       plus_months -months
     end
 
-    def plus_days(days)
-      LocalDateTime.new(@date.plus_days(days), @time)
-    end
-
-    def minus_days(days)
-      plus_days -days
-    end
-
-    def plus_hours(hours)
-      LocalDateTime.from_epoch(to_epoch + (hours * 60 * 60 * 1000))
-    end
-
-    def minus_hours(hours)
-      plus_hours -hours
-    end
-
-    def plus_minutes(minutes)
-      LocalDateTime.from_epoch(to_epoch + (minutes * 60 * 1000))
-    end
-
-    def plus_millis(millis)
-      LocalDateTime.from_epoch(to_epoch + millis)
-    end
-
-    def minus_minutes(minutes)
-      plus_minutes -minutes
-    end
-
     def apply_offset(offset)
       OffsetDateTime.of_epoch(to_epoch, offset)
-    end
-
-    def plus(temporal)
-      plus_millis(temporal.to_millis)
     end
 
     def after?(other)
@@ -137,6 +106,10 @@ module RhodaTime
 
     def tz_format
       "+00:00"
+    end
+
+    def self.from_epoch_with_self(epoch, current)
+      from_epoch(epoch)
     end
 
     def self.from_epoch(epoch)
