@@ -36,6 +36,14 @@ module RhodaTime
       Duration.new(@millis + (hours * HOURS))
     end
 
+    def plus_seconds(seconds)
+      Duration.new(@millis + (seconds * SECONDS))
+    end
+
+    def plus_millis(millis)
+      Duration.new(@millis + millis)
+    end
+
     def to_millis
       @millis
     end

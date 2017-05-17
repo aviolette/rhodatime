@@ -8,10 +8,13 @@ module RhodaTime
   class LocalDateTime < DateTime
     include Temporal
 
+    # Creates a new [LocalDateTime] from the Year/month/day/hour/minute/second/milliseconds
     def self.of(year, month, day, hour, minute, second=0, millis=0)
       self.new(LocalDate.of(year, month, day), LocalTime.of(hour, minute, second, millis))
     end
 
+    # Creates a new [LocalDateTime] from the current clock
+    # @param clock the current clock instance
     def self.now(clock = Clock.instance)
       epoch = clock.now + (clock.offset * 1000)
       self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch))
