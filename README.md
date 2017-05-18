@@ -115,6 +115,41 @@ Create an OffsetDateTime from an ISO string
 #<RhodaTime::OffsetDateTime:0x007fc0fba0bb80 @date=#<RhodaTime::LocalDate:0x007fc0fba11080 @year=2017, @month=5, @day=16>, @time=#<RhodaTime::LocalTime:0x007fc0fba0bd10 @hour=17, @minute=7, @second=58, @millis=508>, @offset=#<RhodaTime::ZoneOffset:0x007fc0fba0bba8 @offset_seconds=-18000>> 
 ````
 
+### Enumerating over a range
+
+A common issue that comes up with time series data is enumerating over a range of two dates.  This library has that behavior built in:
+
+````
+> dt1 = LocalDate.of(2017, 4, 10).at_start_of_day
+
+# build a range from 2017-4-10 until 2017-4-15, then iterate on 12 hour intervals and print the time
+> dt1.range_until(dt1.plus_days(5)).on_interval(Duration.of_hours(12)) { | time | puts time }
+  2017-04-10T00:00
+  2017-04-10T12:00
+  2017-04-11T00:00
+  2017-04-11T12:00
+  2017-04-12T00:00
+  2017-04-12T12:00
+  2017-04-13T00:00
+  2017-04-13T12:00
+  2017-04-14T00:00
+  2017-04-14T12:00
+  2017-04-15T00:00
+
+````
+
+Another variation is to inject an accumulator
+
+````
+> dt1 = LocalDate.of(2017, 4, 10).at_start_of_day
+
+# build a range from 2017-4-10 until 2017-4-15, then iterate on 12 hour intervals accumulate time into array
+> dt1.range_until(dt1.plus_days(5)).inject_on_interval(Duration.of_hours(12), []) { | acc, time | acc << time.to_s }
+   => ["2017-04-10T00:00", "2017-04-10T12:00", "2017-04-11T00:00", "2017-04-11T12:00", "2017-04-12T00:00", "2017-04-12T12:00", "2017-04-13T00:00", "2017-04-13T12:00", "2017-04-14T00:00", "2017-04-14T12:00", "2017-04-15T00:00"] 
+
+````
+
+
 ## Development
 
 To test locally:
