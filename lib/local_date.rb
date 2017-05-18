@@ -1,5 +1,6 @@
 require 'time'
 require_relative './local_date_time'
+require_relative './year_month'
 
 module RhodaTime
   # A date without a timezone or time component, representing the ISO-8601 calendar.
@@ -8,12 +9,12 @@ module RhodaTime
 
     # Builds a [LocalDate] from the specified year-month-day
     def self.of(year, month, day)
-      self.new(year, month, day)
+      new(year, month, day)
     end
 
     # Returns a [LocalDate] on the specified clock
     def self.now(clock = Clock.instance)
-      self.from_epoch(clock.now + (clock.offset * 1000))
+      from_epoch(clock.now + (clock.offset * 1000))
     end
 
     # Parses a LocalDate from a string
@@ -54,7 +55,12 @@ module RhodaTime
     # @param month [int] a number from 1-12
     # @return [LocalDate] a new date object with the specified month
     def with_month(month)
-      LocalDate.of(@year, month, @day)
+      ym = YearMonth.new(@year, month)
+      if ym.last_day_of_month < @day
+        LocalDate.of(@year, month, ym.last_day_of_month)
+      else
+        LocalDate.of(@year, month, @day)
+      end
     end
 
     # Returns a new [LocalDate] with a new day
@@ -141,8 +147,8 @@ module RhodaTime
 
     def initialize(year, month, day)
       raise DateTimeException, "Month needs a value between 1-12, but was #{month}" if month < 1 or month > 12
-      # TODO: should be tailored to months/leap years
-      raise DateTimeException, "Day needs a value between 1-31, but was #{day}" if day < 1 or day > 31
+      ym = YearMonth.of(year, month)
+      raise DateTimeException, "Day needs a value between 1-31, but was #{day}" if day < 1 or day > ym.last_day_of_month
       @year = year; @month = month; @day = day
     end
   end

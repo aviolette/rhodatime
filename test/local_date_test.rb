@@ -167,7 +167,10 @@ module RhodaTime
       assert_equal(LocalDate.of(2019, 5, 14), d.plus_months(26))
     end
 
-
+    def test_plus_months_overextend
+      d = LocalDate.of(2015, 12, 31)
+      assert_equal(LocalDate.of(2016, 2, 29), d.plus_months(2))
+    end
 
     def test_minus_months
       d = LocalDate.of(2017, 3, 14)
