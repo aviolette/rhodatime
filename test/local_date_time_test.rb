@@ -165,7 +165,15 @@ module RhodaTime
     end
 
     def test_plus_month
-      # TODO: implement
+      dt = @date_time.plus_months(25)
+      assert_equal(2019, dt.year, "year should be 2019")
+      assert_equal(1, dt.month, "month should be january")
+      assert_equal(1, dt.day, "day should be the 1st")
+      assert_equal(13, dt.hour)
+      assert_equal(14, dt.minute)
+      assert_equal(15, dt.second)
+      assert_equal(16, dt.millis)
+
     end
 
     def test_plus_days
