@@ -8,9 +8,12 @@ module RhodaTime
       end
 
       def parse(item)
+        matched = does_match(item)
+        raise DateTimeException, "parser does not recognize offset node" unless matched
         # TODO: this only handles size of 3
-        hour = item.remainder[1..2].to_i; minutes = item.remainder[4..5].to_i
-        sign = item.remainder[0..0]
+        hour = matched[2].to_i;
+        minutes = matched[3].to_i
+        sign = matched[1]
         hour = -hour if sign == '-'
         item.date_time = item.date_time.with_offset(ZoneOffset.of_time(hour.to_i, minutes.to_i))
       end
@@ -23,6 +26,15 @@ module RhodaTime
         seconds = seconds.abs % (60 * 60)
         minutes = seconds / 60
         buf << twopad(hours) << ":" << twopad(minutes)
+      end
+
+      def does_match(parse_item)
+        /^([\+|\-])(\d{2}):(\d{2})/.match(parse_item.remainder[0..expected_size])
+      end
+
+      def expected_size
+        # TODO: only supports xxx format
+        6
       end
 
       private

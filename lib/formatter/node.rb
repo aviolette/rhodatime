@@ -13,7 +13,7 @@ module RhodaTime
       end
 
       def matches?(parse_item)
-        matched = Regexp.new("\\d{#{@size}}").match(parse_item.remainder[0..@size])
+        matched = does_match(parse_item)
         if matched
           parse parse_item
         end
@@ -40,6 +40,14 @@ module RhodaTime
 
       def optional?
         false
+      end
+
+      def does_match(parse_item)
+        Regexp.new("\\d{#{expected_size}}").match(parse_item.remainder[0..expected_size])
+      end
+
+      def expected_size
+        @size
       end
 
       private

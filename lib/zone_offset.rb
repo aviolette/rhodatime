@@ -2,13 +2,18 @@ module RhodaTime
   class ZoneOffset
     attr_reader :offset_seconds
 
-    UTC = ZoneOffset.new
+    def initialize(seconds = 0)
+      @offset_seconds = seconds
+    end
 
     OFFSET_FORMATTER = DateTimeFormatter.new("xxx")
 
+    UTC = ZoneOffset.new
+
     def self.of(id)
-      raise DateTimeException, "of() is not implemented yet"
-      # implement
+      return UTC if id == 'Z'
+      return parse(id) if /^[\+|\-]\d{2}:\d{2}/.match(id)
+      raise DateTimeException, "zone ID is not recognized"
     end
 
     def self.of_time(hours, minutes = 0, seconds = 0)
@@ -39,10 +44,8 @@ module RhodaTime
 
     def to_s ; format ; end
 
-    private
-
-    def initialize(seconds = 0)
-      @offset_seconds = seconds
+    def with_offset(offset)
+      @offset_seconds = offset
     end
   end
 end

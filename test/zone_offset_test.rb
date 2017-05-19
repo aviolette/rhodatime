@@ -25,6 +25,31 @@ module RhodaTime
       end
     end
 
+    def test_equal
+      assert_equal(ZoneOffset::UTC, ZoneOffset.of_time(0))
+      assert_equal(ZoneOffset.of_time(5), ZoneOffset.of_time(5))
+    end
+
+    def test_of_utcs
+      assert_equal("+00:00", ZoneOffset.of("Z").to_s)
+      assert_equal(ZoneOffset::UTC, ZoneOffset.of("Z"))
+    end
+
+    def test_parse_bad_format
+      assert_raises DateTimeException do
+        ZoneOffset.parse("foobar")
+      end
+    end
+
+    def test_of_zone_format
+      assert_equal("+05:00", ZoneOffset.of("+05:00").to_s)
+    end
+
+    def test_parse
+      assert_equal(ZoneOffset.of_time(5), ZoneOffset.parse("+05:00"))
+      assert_equal(ZoneOffset.of_time(-5), ZoneOffset.parse("-05:00"))
+    end
+
     def test_format
       assert_equal("+05:00", ZoneOffset.of_time(5).format)
       assert_equal("-05:00", ZoneOffset.of_time(-5).format)

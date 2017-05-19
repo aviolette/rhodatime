@@ -74,11 +74,11 @@ module RhodaTime
     private
 
     def self.from_epoch_with_self(epoch, current)
-      raise DateTimeException, "Foobar"
+      raise DateTimeException, "Not implemented in DateTime: subclass this class and implement"
     end
 
     def self.from_date_time_with_self(date, time, current)
-      raise DateTimeException, "Foobar"
+      raise DateTimeException, "Not implemented in DateTime: subclass this class and implement"
     end
 
     def initialize(date, time)
