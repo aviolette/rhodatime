@@ -11,8 +11,10 @@ module RhodaTime
     UTC = ZoneOffset.new(0, 'UTC')
 
     def self.of(id)
+      return UTC if id == 'Z'
       return parse(id) if /^[\+|\-]\d{2}:\d{2}/.match(id)
-      return UTC if %w(Z UTC+ UTC UTC- GMT GMT+ GMT- UT- UT UT+).include? id
+      matched = /^(UTC|GMT|UT)([\+|\-]\d{2}:\d{2})/.match(id)
+      return parse(matched[2]).with_name(id) if matched
       raise DateTimeException, "zone ID is not recognized"
     end
 
@@ -31,7 +33,7 @@ module RhodaTime
     end
 
     def self.parse(date_string, formatter = OFFSET_FORMATTER)
-      formatter.parse date_string, ZoneOffset.new
+      formatter.parse date_string, ZoneOffset.new(0, date_string)
     end
 
     def format(formatter = OFFSET_FORMATTER)
@@ -45,7 +47,15 @@ module RhodaTime
     def to_s ; format ; end
 
     def with_offset(offset)
-      @offset_seconds = offset
+      offset
+    end
+
+    def with_offset_seconds(offset)
+      ZoneOffset.new(offset, @name)
+    end
+
+    def with_name(name)
+      ZoneOffset.new(@offset_seconds, name)
     end
   end
 end

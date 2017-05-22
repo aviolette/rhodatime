@@ -33,12 +33,17 @@ module RhodaTime
     def test_of_utcs
       assert_equal("+00:00", ZoneOffset.of("Z").to_s)
       assert_equal(ZoneOffset::UTC, ZoneOffset.of("Z"))
-      assert_equal(ZoneOffset::UTC, ZoneOffset.of("UT-"))
-      assert_equal(ZoneOffset::UTC, ZoneOffset.of("UT+"))
-      assert_equal(ZoneOffset::UTC, ZoneOffset.of("GMT+"))
-      assert_equal(ZoneOffset::UTC, ZoneOffset.of("GMT-"))
-      assert_equal(ZoneOffset::UTC, ZoneOffset.of("UTC+"))
-      assert_equal(ZoneOffset::UTC, ZoneOffset.of("UTC-"))
+      assert_equal(ZoneOffset.of_time(0), ZoneOffset.of("Z"))
+    end
+
+    def test_of_offset
+      assert_equal(ZoneOffset.of_time(-1), ZoneOffset.of('UT-01:00'))
+      assert_equal('UT-01:00', ZoneOffset.of('UT-01:00').name)
+      assert_equal(ZoneOffset.of_time(1), ZoneOffset.of('UT+01:00'))
+      assert_equal(ZoneOffset.of_time(13), ZoneOffset.of('GMT+13:00'))
+      assert_equal(ZoneOffset.of_time(-1), ZoneOffset.of('GMT-01:00'))
+      assert_equal(ZoneOffset.of_time(9), ZoneOffset.of('UTC+09:00'))
+      assert_equal(ZoneOffset.of_time(-9), ZoneOffset.of('UTC-09:00'))
     end
 
     def test_parse_bad_format
