@@ -2,7 +2,7 @@ require_relative '../lib/rhodatime'
 require 'minitest/autorun'
 
 module RhodaTime
-  class TestLocalDateFormatter < Minitest::Test
+  class TestDateFormatter < Minitest::Test
 
     def setup
       @date1 = LocalDate.of(2017, 1, 6)

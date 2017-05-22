@@ -24,7 +24,6 @@ module RhodaTime
       formatter.parse date_time_string, LocalDateTime.of(1, 1, 1, 0, 0)
     end
 
-
     def format(formatter = DateTimeFormatter::ISO_LOCAL_DATE_TIME)
       formatter.format self
     end

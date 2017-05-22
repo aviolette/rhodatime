@@ -173,7 +173,6 @@ module RhodaTime
       assert_equal(14, dt.minute)
       assert_equal(15, dt.second)
       assert_equal(16, dt.millis)
-
     end
 
     def test_plus_days
