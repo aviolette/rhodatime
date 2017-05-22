@@ -58,7 +58,6 @@ module RhodaTime
       def self.node_class(field)
         NODE_MAP[field] || ConstantNode
       end
-
     end
   end
 end

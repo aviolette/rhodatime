@@ -63,7 +63,6 @@ module RhodaTime
       def fourpad(item)
         sprintf("%04d", item)
       end
-
     end
   end
 end

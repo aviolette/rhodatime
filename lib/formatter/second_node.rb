@@ -15,7 +15,6 @@ module RhodaTime
       def modify_with
         :with_second
       end
-
     end
   end
 end

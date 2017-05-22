@@ -17,7 +17,6 @@ module RhodaTime
       def modify_with
         :with_hour
       end
-
     end
   end
 end
