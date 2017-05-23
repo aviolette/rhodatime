@@ -14,7 +14,13 @@ module RhodaTime
       return UTC if id == 'Z'
       return parse(id) if /^[\+|\-]\d{2}:\d{2}/.match(id)
       matched = /^(UTC|GMT|UT)([\+|\-]\d{2}:\d{2})/.match(id)
-      return parse(matched[2]).with_name(id) if matched
+      return parse(matched[2]) if matched
+      # if /^\w{3}$/.match(id)
+      #   return SHORT_IDS[id] unless SHORT_IDS[id].nil?
+      # else
+      #   item = long_ids[id]
+      #   return item unless item.nil?
+      # end
       raise DateTimeException, "zone ID is not recognized"
     end
 
@@ -57,5 +63,37 @@ module RhodaTime
     def with_name(name)
       ZoneOffset.new(@offset_seconds, name)
     end
+
+# Result: [NST:Pacific/Auckland, MST:-07:00, AET:Australia/Sydney, BET:America/Sao_Paulo, PST:America/Los_Angeles, ACT:Australia/Darwin, SST:Pacific/Guadalcanal, VST:Asia/Ho_Chi_Minh, CAT:Africa/Harare, ECT:Europe/Paris, EAT:Africa/Addis_Ababa, IET:America/Indiana/Indianapolis, MIT:Pacific/Apia, NET:Asia/Yerevan]
+
+=begin
+    SHORT_IDS = {
+        'CTT' => ZoneOffset.of_time(8).with_name('Asia/Shanghai'),
+        'ART' => ZoneOffset.of_time(3).with_name('Africa/Cairo'),
+        'CNT' => ZoneOffset.of_time(-2, 30).with_name('America/St_Johns'),
+        'PRT' => ZoneOffset.of_time(-4).with_name('America/Puerto_Rico'),
+        'PNT' => ZoneOffset.of_time(-7).with_name('America/Phoenix'),
+        'PLT' => ZoneOffset.of_time(5).with_name('Asia/Karachi'),
+        'AST' => ZoneOffset.of_time(-8).with_name('America/Anchorage'),
+        'BST' => ZoneOffset.of_time(6).with_name('Asia/Dhaka'),
+        'CST' => ZoneOffset.of_time(-5).with_name('America/Chicago'),
+        'EST' => ZoneOffset.of_time(-4).with_name('America/New_York'),
+        'HST' => ZoneOffset.of_time(-10),
+        'JST' => ZoneOffset.of_time(9).with_name('Asia/Tokyo'),
+        'IST' => ZoneOffset.of_time(5, 30).with_name('Asia/Kolkata'),
+        'AGT' => ZoneOffset.of_time(-3).with_name('America/Argentina/Buenos_Aires'),
+    }
+
+    def self.long_ids
+      return @long_ids unless @long_ids.nil?
+      @long_ids = SHORT_IDS.values.inject({}) do |acc, val|
+        acc[val.name] = val
+        acc
+      end
+      @long_ids
+    end
+=end
+
+
   end
 end
