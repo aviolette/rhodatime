@@ -9,17 +9,20 @@ require_relative './minute_node'
 require_relative './second_node'
 require_relative './millis_node'
 require_relative './offset_node'
+require_relative './am_pm_node'
+require_relative './twelve_hour_node'
 
 module RhodaTime
   module Formatter
     class NodeBuilder
 
       NODE_MAP = {
+          'a' => AmPmNode,
           'Y' => YearNode,
           'M' => MonthNode,
           'd' => DayNode,
           'H' => HourNode,
-          'h' => HourNode,
+          'h' => TwelveHourNode,
           'm' => MinuteNode,
           's' => SecondNode,
           'S' => MillisNode,
@@ -49,9 +52,7 @@ module RhodaTime
             buf << c
           end
         end
-        if !buf.empty?
-          active.push(node_class(buf[0]).new(buf))
-        end
+        active.push(node_class(buf[0]).new(buf)) unless buf.empty?
         top_node
       end
 

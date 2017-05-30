@@ -164,5 +164,25 @@ module RhodaTime
       assert_equal(LocalDate.of(20, 3, 1), formatter.parse('0020-3-1', LocalDate.new(1, 1, 1)))
       assert_equal(LocalDate.of(2, 3, 14), formatter.parse('0002-3-14', LocalDate.new(1, 1, 1)))
     end
+
+    def test_format_date_time_with_am
+      formatter = DateTimeFormatter.new("hh:mm a")
+      assert_equal("09:13 am", formatter.format(@date_time1))
+    end
+
+    def test_format_date_time_with_pm
+      formatter = DateTimeFormatter.new("hh:mm a")
+      assert_equal("03:13 pm", formatter.format(@date_time1.with_hour(15)))
+    end
+
+    def test_format_midnight_with_am
+      formatter = DateTimeFormatter.new("hh:mm a")
+      assert_equal("12:13 am", formatter.format(@date_time1.with_hour(0)))
+    end
+
+    def test_format_noon_with_am
+      formatter = DateTimeFormatter.new("hh:mm a")
+      assert_equal("12:13 pm", formatter.format(@date_time1.with_hour(12)))
+    end
   end
 end
