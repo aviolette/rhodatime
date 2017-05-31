@@ -10,14 +10,14 @@ module RhodaTime
 
     # Creates a new [LocalDateTime] from the Year/month/day/hour/minute/second/milliseconds
     def self.of(year, month, day, hour, minute, second=0, millis=0)
-      self.new(LocalDate.of(year, month, day), LocalTime.of(hour, minute, second, millis))
+      new(LocalDate.of(year, month, day), LocalTime.of(hour, minute, second, millis))
     end
 
     # Creates a new [LocalDateTime] from the current clock
     # @param clock the current clock instance
     def self.now(clock = Clock.instance)
       epoch = clock.now + (clock.offset * 1000)
-      self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch))
+      new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch))
     end
 
     def self.parse(date_time_string, formatter = DateTimeFormatter::ISO_LOCAL_DATE_TIME)
@@ -70,7 +70,7 @@ module RhodaTime
     end
 
     def self.from_date_time_with_self(date, time, current)
-      self.new(date, time)
+      new(date, time)
     end
 
     def self.from_epoch(epoch)

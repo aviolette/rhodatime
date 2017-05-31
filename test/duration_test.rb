@@ -32,6 +32,13 @@ module RhodaTime
 
     def test_negated
       assert_equal("-PT23.456S", Duration.of_millis(23456).negated.to_s)
+      assert_equal(false, Duration.of_millis(23456).negative?)
+      assert_equal(true, Duration.of_millis(-23456).negative?)
+    end
+
+    def test_equal
+      assert_equal(Duration.of_millis(123456), Duration.of_millis(123456))
+      assert_equal(Duration.of_millis(0), Duration.of_millis(0))
     end
   end
 end

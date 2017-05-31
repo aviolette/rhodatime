@@ -31,7 +31,7 @@ module RhodaTime
     def self.from_epoch(val)
       # TODO: do this natively
       time = Time.at(val / 1000).getlocal(0)
-      self.new(time.year, time.month, time.day)
+      new(time.year, time.month, time.day)
     end
 
     # Returns a [LocalDateTime] object with the current date object at the start of the day

@@ -8,6 +8,12 @@ module RhodaTime
       plus duration.negated
     end
 
+    # Returns the duration from this time to another time
+    # TODO: add unit test and documentation
+    def until(time)
+      Duration.of_millis(time.to_epoch - to_epoch)
+    end
+
     def plus_millis(millis)
       self.class.from_epoch_with_self(to_epoch + millis, self)
     end
