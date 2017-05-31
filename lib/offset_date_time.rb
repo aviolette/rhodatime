@@ -9,12 +9,12 @@ module RhodaTime
     attr_reader :offset
 
     def self.of(year, month, day, hour, minute, second, millis, offset)
-      self.new(LocalDate.of(year, month, day), LocalTime.of(hour, minute, second, millis), offset)
+      new(LocalDate.of(year, month, day), LocalTime.of(hour, minute, second, millis), offset)
     end
 
     def self.of_epoch(epoch, offset)
       epoch = epoch + (offset.offset_seconds * 1000)
-      self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), offset)
+      new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), offset)
     end
 
     def self.now(clock = Clock.instance)
@@ -46,15 +46,15 @@ module RhodaTime
     private
 
     def self.from_epoch_with_self(epoch, current)
-      self.of_epoch_with_no_adjustment(epoch, current)
+      of_epoch_with_no_adjustment(epoch, current)
     end
 
     def self.of_epoch_with_no_adjustment(epoch, offset)
-      self.new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), offset)
+      new(LocalDate.from_epoch(epoch), LocalTime.from_epoch(epoch), offset)
     end
 
     def self.from_date_time_with_self(date, time, current)
-      self.new(date, time, current.offset)
+      new(date, time, current.offset)
     end
 
     def tz_format ; @offset.format ; end
