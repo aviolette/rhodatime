@@ -36,6 +36,11 @@ module RhodaTime
       assert_equal(true, Duration.of_millis(-23456).negative?)
     end
 
+    def test_abs
+      assert_equal(Duration.of_millis(23456), Duration.of_millis(-23456).abs)
+      assert_equal(Duration.of_millis(23456), Duration.of_millis(23456).abs)
+    end
+
     def test_equal
       assert_equal(Duration.of_millis(123456), Duration.of_millis(123456))
       assert_equal(Duration.of_millis(0), Duration.of_millis(0))

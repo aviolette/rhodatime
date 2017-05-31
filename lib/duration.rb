@@ -51,7 +51,9 @@ module RhodaTime
       Duration.new(-@millis)
     end
 
-    #TODO: add abs
+    def abs
+      negative? ? Duration.of_millis(@millis.abs) : self
+    end
 
     def negative?
       @millis < 0
