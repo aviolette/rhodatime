@@ -9,6 +9,12 @@ module RhodaTime
       new(millis)
     end
 
+    def initialize(millis = 0)
+      @millis = millis
+    end
+
+    ZERO = Duration.new
+
     def self.of_seconds(seconds)
       new(seconds * SECONDS)
     end
@@ -59,6 +65,22 @@ module RhodaTime
       @millis < 0
     end
 
+    def multiply_by(other)
+      Duration.new(@millis * other)
+    end
+
+    def divide_by(other)
+      Duration.new(@millis / other)
+    end
+
+    def *(other)
+      multiply_by(other)
+    end
+
+    def /(other)
+      divide_by(other)
+    end
+
     def to_s
       abs_millis = @millis.abs
       epoch_in_seconds = abs_millis / SECONDS
@@ -95,8 +117,5 @@ module RhodaTime
     DAYS = 86400000
     HOURS_IN_SECONDS = 3600
 
-    def initialize(millis)
-      @millis = millis
-    end
   end
 end

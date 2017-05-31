@@ -45,5 +45,24 @@ module RhodaTime
       assert_equal(Duration.of_millis(123456), Duration.of_millis(123456))
       assert_equal(Duration.of_millis(0), Duration.of_millis(0))
     end
+
+    def test_multiply_by
+      assert_equal(Duration::ZERO, Duration::ZERO.multiply_by(5))
+      assert_equal(Duration::ZERO, Duration::ZERO * 0)
+      assert_equal(Duration.of_millis(25), Duration.of_millis(5) * 5)
+      assert_equal(Duration.of_millis(25), Duration.of_millis(5).multiply_by(5))
+    end
+
+    def test_divide_by
+      assert_equal(Duration::ZERO, Duration::ZERO.divide_by(1))
+      assert_raises ZeroDivisionError do
+        Duration.of_millis(5) / 0
+      end
+      assert_raises ZeroDivisionError do
+        Duration::ZERO.divide_by(0)
+      end
+      assert_equal(Duration.of_millis(5), Duration.of_millis(25) / 5)
+      assert_equal(Duration.of_millis(5), Duration.of_millis(25).divide_by(5))
+    end
   end
 end
