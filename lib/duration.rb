@@ -48,14 +48,23 @@ module RhodaTime
       @millis
     end
 
+    def negated
+      self.class.new(-@millis)
+    end
+
+    def negative?
+      @millis < 0
+    end
+
     def to_s
-      epoch_in_seconds = @millis / SECONDS
+      abs_millis = @millis.abs
+      epoch_in_seconds = abs_millis / SECONDS
       hours = epoch_in_seconds / 3600
       seconds_from_start_of_day = epoch_in_seconds - (3600 * hours)
       hours_in_day = seconds_from_start_of_day / 3600
       minutes_in_hour = (seconds_from_start_of_day % 3600) / 60
       seconds_in_minutes = (seconds_from_start_of_day - (hours_in_day * 3600) - (minutes_in_hour * 60))
-      millis_in_seconds = @millis - ((@millis / SECONDS).to_i * SECONDS)
+      millis_in_seconds = abs_millis - ((abs_millis / SECONDS).to_i * SECONDS)
       hours = hours == 0 ? '' : "#{hours.to_i}H"
       minutes = minutes_in_hour == 0 ? '' : "#{minutes_in_hour}M"
       if seconds_in_minutes == 0 and millis_in_seconds != 0
@@ -67,7 +76,8 @@ module RhodaTime
       else
         seconds = ''
       end
-      "PT#{hours}#{minutes}#{seconds}"
+      sign = @millis < 0 ? "-" : "";
+      "#{sign}PT#{hours}#{minutes}#{seconds}"
     end
 
     private

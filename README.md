@@ -115,7 +115,17 @@ Create an OffsetDateTime from an ISO string
 #<RhodaTime::OffsetDateTime:0x007fc0fba0bb80 @date=#<RhodaTime::LocalDate:0x007fc0fba11080 @year=2017, @month=5, @day=16>, @time=#<RhodaTime::LocalTime:0x007fc0fba0bd10 @hour=17, @minute=7, @second=58, @millis=508>, @offset=#<RhodaTime::ZoneOffset:0x007fc0fba0bba8 @offset_seconds=-18000>> 
 ````
 
-### Enumerating over a range
+### Duration
+
+A duration represents an elapsed period of time.
+
+````
+> d = Duration.of_minutes(12).plus_hours(72).to_s
+"PT72H12M"
+
+> LocalDateTime.of(2015, 12, 13, 1, 2, 3).plus(d).to_s
+"2015-12-16T01:14:03" 
+````
 
 A common issue that comes up with time series data is enumerating over a range of two dates.  This library has that behavior built in:
 

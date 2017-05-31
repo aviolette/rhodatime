@@ -244,6 +244,17 @@ module RhodaTime
       assert_equal(16, dt.millis)
     end
 
+    def test_minus
+      dt = @date_time.minus(Duration.of_hours(14))
+      assert_equal(2017, dt.year)
+      assert_equal(11, dt.month)
+      assert_equal(30, dt.day)
+      assert_equal(23, dt.hour)
+      assert_equal(14, dt.minute)
+      assert_equal(15, dt.second)
+      assert_equal(16, dt.millis)
+    end
+
     def test_on_interval
       acc = ""
       @date_time.range_until(@date_time.plus_days(4))

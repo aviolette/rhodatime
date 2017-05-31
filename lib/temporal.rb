@@ -4,6 +4,10 @@ module RhodaTime
       self.class.from_epoch_with_self(to_epoch + amount.to_millis, self)
     end
 
+    def minus(duration)
+      plus duration.negated
+    end
+
     def plus_millis(millis)
       self.class.from_epoch_with_self(to_epoch + millis, self)
     end

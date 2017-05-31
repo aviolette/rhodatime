@@ -27,6 +27,11 @@ module RhodaTime
       assert_equal("PT10H", Duration.of_hours(10).to_s)
       assert_equal("PT48H", Duration.of_days(2).to_s)
       assert_equal("PT48H10M55.345S", Duration.of_days(2).plus_minutes(10).plus_seconds(55).plus_millis(345).to_s)
+      assert_equal("-PT23.456S", Duration.of_millis(-23456).to_s)
+    end
+
+    def test_negated
+      assert_equal("-PT23.456S", Duration.of_millis(23456).negated.to_s)
     end
   end
 end
