@@ -153,8 +153,12 @@ Another variation is to inject an accumulator
 ````
 > dt1 = LocalDate.of(2017, 4, 10).at_start_of_day
 
+> range = dt1.range_until(dt1.plus_days(5))
+
 # build a range from 2017-4-10 until 2017-4-15, then iterate on 12 hour intervals accumulate time into array
-> dt1.range_until(dt1.plus_days(5)).inject_on_interval(Duration.of_hours(12), []) { | acc, time | acc << time.to_s }
+> range.inject_on_interval(Duration.of_hours(12), []) do | acc, time | 
+    acc << time.to_s
+  end
    => ["2017-04-10T00:00", "2017-04-10T12:00", "2017-04-11T00:00", "2017-04-11T12:00", "2017-04-12T00:00", "2017-04-12T12:00", "2017-04-13T00:00", "2017-04-13T12:00", "2017-04-14T00:00", "2017-04-14T12:00", "2017-04-15T00:00"] 
 
 ````
