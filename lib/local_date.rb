@@ -64,14 +64,14 @@ module RhodaTime
     end
 
     # Returns a new [LocalDate] with a new day
-    # @param month [int] a number from 1-31
+    # @param day [int] a number from 1-31
     # @return [LocalDate] a new date object with the specified day
     def with_day(day)
       LocalDate.of(@year, @month, day)
     end
 
     # Returns a new [LocalDate] with a new year
-    # @param month [int] a number representing the year
+    # @param year [int] a number representing the year
     # @return [LocalDate] a new date object with the specified year
     def with_year(year)
       LocalDate.of(year, @month, @day)
